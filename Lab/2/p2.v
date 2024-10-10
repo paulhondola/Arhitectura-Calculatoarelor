@@ -4,7 +4,7 @@ module p2 (
 );
 	//write Verilog code here
 
-	assign o = (i == 3 | i == 7);
+	assign o = i[1] & i[0];
 
 endmodule
 

@@ -3,7 +3,9 @@ module p4 (
 	output is6
 );
 	//write Verilog code here
-	assign is6 = i / 10 == 6;
+	//assign is6 = i / 10 == 6;
+	assign is6 = i[5:2] == 30;
+	//assign is6= i[5]&i[4]&i[3]&i[2];
 endmodule
 
 module p4_tb;
