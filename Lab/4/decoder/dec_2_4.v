@@ -1,13 +1,21 @@
 module dec_2_4(
     input wire enable, 
     input wire [1:0] sel,
-    output wire [3:0] data
+    output reg [3:0] data
 );
-   assign data[0] = enable | sel[1] | sel[0];
-   assign data[1] = enable | sel[1] | ~sel[0];
-   assign data[2] = enable | ~sel[1] | sel[0];
-   assign data[3] = enable | ~sel[1] | ~sel[0];
-
+    always @(*) begin
+        if (enable) 
+            data = 4'b1111; 
+        else begin       // Active low enable
+            case (sel)
+                2'b00: data = 4'b1110;  // Active-low, only one output goes to 0
+                2'b01: data = 4'b1101;
+                2'b10: data = 4'b1011;
+                2'b11: data = 4'b0111;
+                default: data = 4'b1111;  // Default all high (inactive)
+            endcase
+        end
+    end
 endmodule
 
 module dec_2_4_tb;
@@ -25,8 +33,8 @@ dec_2_4 dec_tb(
 integer i;
 
 initial begin
-    $display("enable sel[1] sel[0] | data[3] data[2] data[1] data[0]");
-    $monitor("%b       %b       %b    |    %b     %b     %b      %b", enable, sel[1], sel[0], data[3], data[2], data[1], data[0]);
+    $display("en sel | data");
+    $monitor("%b  %b  | %b  ", enable, sel, data);
     {enable, sel} = 0;
     for(i = 0; i < 4; i = i + 1)
         #20 sel = i;

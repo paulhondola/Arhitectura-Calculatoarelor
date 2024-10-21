@@ -1,9 +1,9 @@
 module cmp4b(
     input wire [3:0] a,
     input wire [3:0] b,
-    output reg equal,
-    output reg greater,
-    output reg less
+    output wire equal,
+    output wire greater,
+    output wire less
 );
 
 wire [1:0] eq, gr, ls;
@@ -24,18 +24,11 @@ cmp2b cmp2b_back(
     .less(ls[0])
 );
 
-always @(*) begin
-    {equal, greater, less} = {0, 0, 0};
-    if(eq[1] == eq[0])
-        equal = 1;
-    else if(eq[1] > eq[0])
-        greater = 1;
-    else
-        less = 1;
-end
+assign equal = eq[1] & eq[0];
+assign greater = (eq[1] & gr[0]) | (gr[1] & eq[0]) | (gr[1] & ls[0]) | (gr[1] & gr[0]);
+assign less = (eq[1] & ls[0]) | (ls[1] & eq[0]) | (ls[1] & gr[0]) | (ls[1] & ls[0]);
 
 endmodule
-
 
 
 module cmp4b_tb;
@@ -59,10 +52,30 @@ initial begin
     $monitor("%b %b %b %b %b", a, b, equal, greater, less);
 
     for(i = 0; i < 256; i = i + 1) begin
-        a = i;
-        b = i;
+        {a, b} = i;
+        #5;
     end
 
+end
+
+endmodule
+
+module cmp2b(
+    input wire [1:0] a,
+    input wire [1:0] b,
+    output reg equal,
+    output reg greater,
+    output reg less
+);
+
+always @(*) begin
+    equal = 0; greater = 0; less = 0;
+    if (a == b)
+        equal = 1;
+    else if (a > b)
+        greater = 1;
+    else
+        less = 1;
 end
 
 endmodule

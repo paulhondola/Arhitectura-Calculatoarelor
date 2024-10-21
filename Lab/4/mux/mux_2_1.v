@@ -5,8 +5,6 @@ module mux_2_1(
     assign out = (a & (~sel)) | (b & sel);
 endmodule
 
-
-
 module mux_tb();
 
 reg a, b, sel;
@@ -22,10 +20,14 @@ mux_2_1 mux_cut(
 integer i = 0;
 
 initial begin
+
+    $display("a | b | sel | out");
+    $monitor("%b | %b | %b | %b", a, b, sel, out);
+
     {a, b, sel} = 0;
+    #10;
     for(i = 0; i < 8; i = i + 1) begin
-        {a, b, sel} = i;
-        $display("a = %b, b = %b, sel = %b, out = %b", a, b, sel, out);
+        #10 {a, b, sel} = i;
     end
 end
 
