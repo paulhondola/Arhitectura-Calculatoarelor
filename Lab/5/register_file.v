@@ -1,3 +1,25 @@
+module register #(
+  parameter width = 8
+)(
+  input wire clk,
+  input wire reset_b,
+  input wire load,
+  input wire clear,
+  input wire [width-1:0] data_in,
+  output reg [width-1:0] data_out
+);
+
+always @ (posedge clk, negedge reset_b) begin
+  if (!reset_b)
+    data_out <= 0;
+  else if (clear)
+    data_out <= 0;
+  else if (load)
+    data_out <= data_in;
+end
+
+endmodule
+
 module register_file(
     input wire clk,
     input wire reset_b,
@@ -10,24 +32,82 @@ module register_file(
     input wire[1:0] read_address
 );
 
-reg [3:0][7:0] data;
+wire [3:0][7:0] data;
+wire [3:0] clear = 4'b0000;
 wire [3:0] load;
 
-decoder_2_4 dec(.sel(write_address), .out(load));
-mux_4_1 mux(.sel(read_address), .data(data), .out(read_data));
+decoder_2_4_enable dec(.enable(write_enable), .sel(write_address), .out(load));
 
-always @(posedge clk, posedge reset_b) begin
+register #(
+    .width(8)
+) reg0(
+    .clk(clk),
+    .reset_b(reset_b),
+    .load(load[0]),
+    .clear(clear[0]),
+    .data_in(write_data),
+    .data_out(data[0])
+);
 
-    if(!reset_b) begin
-        data[0] = 8'h0;
-        data[1] = 8'h0;
-        data[2] = 8'h0;
-        data[3] = 8'h0;
-    end
+register #(
+    .width(8)
+) reg1(
+    .clk(clk),
+    .reset_b(reset_b),
+    .load(load[1]),
+    .clear(clear[1]),
+    .data_in(write_data),
+    .data_out(data[1])
+);
 
-    if(write_enable)
-        data[load] <= write_data;
-end
+register #(
+    .width(8)
+) reg2(
+    .clk(clk),
+    .reset_b(reset_b),
+    .load(load[2]),
+    .clear(clear[2]),
+    .data_in(write_data),
+    .data_out(data[2])
+);
+
+register #(
+    .width(8)
+) reg3(
+    .clk(clk),
+    .reset_b(reset_b),
+    .load(load[3]),
+    .clear(clear[3]),
+    .data_in(write_data),
+    .data_out(data[3])
+);
+
+mux_4_1 #(
+) mux(
+    .sel(read_address),
+    .data(data),
+    .out(read_data)
+);
+
+
+endmodule
+
+module decoder_2_4_enable(
+  input wire enable,
+  input wire [1:0] sel,
+  output reg [3:0] out
+);
+
+always @(*)
+  if (enable)
+    case (sel)
+      2'b00: out = 4'b0001;
+      2'b01: out = 4'b0010;
+      2'b10: out = 4'b0100;
+      2'b11: out = 4'b1000;
+    endcase
+  else
+    out = 4'b0000;
 
 endmodule
 
@@ -38,15 +118,6 @@ module mux_4_1 (
 );
 
 assign out = data[sel];
-
-endmodule
-
-module decoder_2_4 (
-    input wire[1:0] sel,
-    output wire[3:0] out
-);
-
-assign out = 4'd1 << sel;
 
 endmodule
 

@@ -3,7 +3,7 @@ module mux_4_1 #(
     parameter width = 8 // default width
 )(
     input wire [1:0] sel,               // Selector signal
-    input wire [3:0][width-1:0] data,   // Data inputs
+    input wire [width-1:0] d0, d1, d2, d3,   // Data inputs
     output wire [width-1:0] out         // Output
 );
 
@@ -16,60 +16,42 @@ module mux_4_1 #(
     );
 
     // Tri-state drivers: only one data line drives the output at a time
-    assign out = enable[0] ? data[0] : 
-                 enable[1] ? data[1] : 
-                 enable[2] ? data[2] : 
-                 enable[3] ? data[3] : 
+    assign out = enable[0] ? d0 : 
+                 enable[1] ? d1 : 
+                 enable[2] ? d2 : 
+                 enable[3] ? d3 : 
                  {width{1'bz}};  // High-impedance if no valid selection
 
 endmodule
 
-module tb_mux_4_1;
+module mux_4_1_tb;
+	reg [1:0] s;
+	reg [3:0] d0, d1, d2, d3;
+	wire [3:0] o;
 
-    // Parameters for data width
-    parameter width = 8;
-
-    // Testbench signals
-    reg [1:0] sel;                      // Selector signal
-    reg [3:0][width-1:0] data;           // Data inputs
-    wire [width-1:0] out;                // Mux output
-
-    // Instantiate the mux_4_1 module
-    mux_4_1 #(width) uut (
-        .sel(sel),
-        .data(data),
-        .out(out)
-    );
-
-    // Testbench logic
-    initial begin
-        // Monitor output to see the changes
-        $monitor("Time = %0t | sel = %b | data[0] = %h | data[1] = %h | data[2] = %h | data[3] = %h | out = %h",
-                 $time, sel, data[0], data[1], data[2], data[3], out);
-
-        // Initialize inputs
-        sel = 2'b00;
-        data[0] = 8'hAA; // Data input 0 = 0xAA
-        data[1] = 8'hBB; // Data input 1 = 0xBB
-        data[2] = 8'hCC; // Data input 2 = 0xCC
-        data[3] = 8'hDD; // Data input 3 = 0xDD
-
-        // Apply test cases
-        #10 sel = 2'b00; // Expect data[0] = 0xAA
-        #10 sel = 2'b01; // Expect data[1] = 0xBB
-        #10 sel = 2'b10; // Expect data[2] = 0xCC
-        #10 sel = 2'b11; // Expect data[3] = 0xDD
-
-        // Change data values
-        #10 data[0] = 8'h11;
-        #10 sel = 2'b00; // Expect data[0] = 0x11
-
-        #10 data[3] = 8'h44;
-        #10 sel = 2'b11; // Expect data[3] = 0x44
-
-        // Finish simulation
-        #10 $finish;
-    end
+	mux_4_1 #(
+	) cut(
+		.d0(d0),
+		.d1(d1),
+		.d2(d2),
+		.d3(d3),
+		.s(s),
+		.o(o)
+	);
+	
+	integer k;
+	initial begin
+		d0 = 4'b0101;
+		d1 = 4'b1111;
+		d2 = 4'b0000;
+		d3 = 4'b1100;
+		
+		$display("Time\td0\td1\td2\td3\ts\to");
+		$monitor("%0t\t%b\t%b\t%b\t%b\t%b\t%b", $time, d0, d1, d2, d3, s, o);
+		s = 2'b00;
+		for (k = 1; k < 4; k = k + 1)
+			#10 s = k;
+	end
 endmodule
 
 module decoder_2_4 (

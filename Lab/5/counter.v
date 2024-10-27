@@ -9,7 +9,7 @@ module counter #(
     output reg[width-1:0] q
 );
 
-always @(posedge clk, posedge rst_b) begin
+always @(posedge clk, negedge rst_b) begin
     if(!rst_b)
         q <= init_value;
     else if (clear)
