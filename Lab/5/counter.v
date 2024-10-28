@@ -37,7 +37,7 @@ module tb_counter;
   counter #(
     .width(width),
     .init_value(init_value)
-  ) uut (
+  ) cut (
     .clk(clk),
     .rst_b(rst_b),
     .c_up(c_up),
@@ -54,21 +54,21 @@ module tb_counter;
     $monitor("%b   %b    %b    %b | %h", clk, rst_b, c_up, clear, q);
     // Initialize signals
     clk = 0;
-    rst_b = 1;  // Not in reset
+    rst_b = 1;
     c_up = 0;
     clear = 0;
 
     // Apply reset
-    #10 rst_b = 0; // Assert reset
-    #10 rst_b = 1; // Deassert reset
+    #10 rst_b = 0;
+    #10 rst_b = 1;
 
     // Start counting
     #10 c_up = 1;
     #50 c_up = 0; // Stop counting
 
     // Apply clear signal
-    #10 clear = 1; // Assert clear
-    #10 clear = 0; // Deassert clear
+    #10 clear = 1; 
+    #10 clear = 0;
 
     // Finish simulation
     #10 $finish;

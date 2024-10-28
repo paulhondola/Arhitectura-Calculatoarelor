@@ -1,0 +1,129 @@
+#! /opt/homebrew/Cellar/icarus-verilog/12.0/bin/vvp
+:ivl_version "12.0 (stable)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision + 0;
+:vpi_module "/opt/homebrew/Cellar/icarus-verilog/12.0/lib/ivl/system.vpi";
+:vpi_module "/opt/homebrew/Cellar/icarus-verilog/12.0/lib/ivl/vhdl_sys.vpi";
+:vpi_module "/opt/homebrew/Cellar/icarus-verilog/12.0/lib/ivl/vhdl_textio.vpi";
+:vpi_module "/opt/homebrew/Cellar/icarus-verilog/12.0/lib/ivl/v2005_math.vpi";
+:vpi_module "/opt/homebrew/Cellar/icarus-verilog/12.0/lib/ivl/va_math.vpi";
+S_0x147608b90 .scope module, "mux2s_tb" "mux2s_tb" 2 41;
+ .timescale 0 0;
+v0x147625d30_0 .var "d0", 3 0;
+v0x147625e00_0 .var "d1", 3 0;
+v0x147625e90_0 .var "d2", 3 0;
+v0x147625f60_0 .var "d3", 3 0;
+v0x147626010_0 .var/i "k", 31 0;
+RS_0x148040310 .resolv tri, L_0x147626320, L_0x147626520, L_0x147626790, L_0x147626990;
+v0x1476260e0_0 .net8 "o", 3 0, RS_0x148040310;  4 drivers
+v0x147626170_0 .var "s", 1 0;
+S_0x147608d00 .scope module, "dut" "mux_2s" 2 47, 2 19 0, S_0x147608b90;
+ .timescale 0 0;
+    .port_info 0 /INPUT 4 "d0";
+    .port_info 1 /INPUT 4 "d1";
+    .port_info 2 /INPUT 4 "d2";
+    .port_info 3 /INPUT 4 "d3";
+    .port_info 4 /INPUT 2 "s";
+    .port_info 5 /OUTPUT 4 "o";
+P_0x14760ce60 .param/l "w" 0 2 20, +C4<00000000000000000000000000000100>;
+v0x147625220_0 .net *"_ivl_1", 0 0, L_0x147626240;  1 drivers
+v0x1476252b0_0 .net *"_ivl_13", 0 0, L_0x147626640;  1 drivers
+o0x148040130 .functor BUFZ 4, C4<zzzz>; HiZ drive
+; Elide local net with no drivers, v0x147625340_0 name=_ivl_14
+v0x147625400_0 .net *"_ivl_19", 0 0, L_0x1476268b0;  1 drivers
+o0x148040190 .functor BUFZ 4, C4<zzzz>; HiZ drive
+; Elide local net with no drivers, v0x1476254b0_0 name=_ivl_2
+o0x1480401c0 .functor BUFZ 4, C4<zzzz>; HiZ drive
+; Elide local net with no drivers, v0x1476255a0_0 name=_ivl_20
+v0x147625650_0 .net *"_ivl_7", 0 0, L_0x147626480;  1 drivers
+o0x148040220 .functor BUFZ 4, C4<zzzz>; HiZ drive
+; Elide local net with no drivers, v0x147625700_0 name=_ivl_8
+v0x1476257b0_0 .net "d0", 3 0, v0x147625d30_0;  1 drivers
+v0x1476258c0_0 .net "d1", 3 0, v0x147625e00_0;  1 drivers
+v0x147625970_0 .net "d2", 3 0, v0x147625e90_0;  1 drivers
+v0x147625a20_0 .net "d3", 3 0, v0x147625f60_0;  1 drivers
+v0x147625ad0_0 .net8 "o", 3 0, RS_0x148040310;  alias, 4 drivers
+v0x147625b80_0 .net "o_en", 3 0, v0x147611c40_0;  1 drivers
+v0x147625c40_0 .net "s", 1 0, v0x147626170_0;  1 drivers
+L_0x147626240 .part v0x147611c40_0, 0, 1;
+L_0x147626320 .functor MUXZ 4, o0x148040190, v0x147625d30_0, L_0x147626240, C4<>;
+L_0x147626480 .part v0x147611c40_0, 1, 1;
+L_0x147626520 .functor MUXZ 4, o0x148040220, v0x147625e00_0, L_0x147626480, C4<>;
+L_0x147626640 .part v0x147611c40_0, 2, 1;
+L_0x147626790 .functor MUXZ 4, o0x148040130, v0x147625e90_0, L_0x147626640, C4<>;
+L_0x1476268b0 .part v0x147611c40_0, 3, 1;
+L_0x147626990 .functor MUXZ 4, o0x1480401c0, v0x147625f60_0, L_0x1476268b0, C4<>;
+S_0x14760b950 .scope module, "decoder" "dec_2to4" 2 29, 2 1 0, S_0x147608d00;
+ .timescale 0 0;
+    .port_info 0 /INPUT 2 "s";
+    .port_info 1 /OUTPUT 4 "o";
+v0x147611c40_0 .var "o", 3 0;
+v0x147625180_0 .net "s", 1 0, v0x147626170_0;  alias, 1 drivers
+E_0x1476128d0 .event anyedge, v0x147625180_0;
+    .scope S_0x14760b950;
+T_0 ;
+    %wait E_0x1476128d0;
+    %load/vec4 v0x147625180_0;
+    %cmpi/e 0, 0, 2;
+    %jmp/0xz  T_0.0, 4;
+    %pushi/vec4 1, 0, 4;
+    %store/vec4 v0x147611c40_0, 0, 4;
+    %jmp T_0.1;
+T_0.0 ;
+    %load/vec4 v0x147625180_0;
+    %cmpi/e 1, 0, 2;
+    %jmp/0xz  T_0.2, 4;
+    %pushi/vec4 2, 0, 4;
+    %store/vec4 v0x147611c40_0, 0, 4;
+    %jmp T_0.3;
+T_0.2 ;
+    %load/vec4 v0x147625180_0;
+    %cmpi/e 2, 0, 2;
+    %jmp/0xz  T_0.4, 4;
+    %pushi/vec4 4, 0, 4;
+    %store/vec4 v0x147611c40_0, 0, 4;
+    %jmp T_0.5;
+T_0.4 ;
+    %pushi/vec4 8, 0, 4;
+    %store/vec4 v0x147611c40_0, 0, 4;
+T_0.5 ;
+T_0.3 ;
+T_0.1 ;
+    %jmp T_0;
+    .thread T_0, $push;
+    .scope S_0x147608b90;
+T_1 ;
+    %pushi/vec4 5, 0, 4;
+    %store/vec4 v0x147625d30_0, 0, 4;
+    %pushi/vec4 15, 0, 4;
+    %store/vec4 v0x147625e00_0, 0, 4;
+    %pushi/vec4 0, 0, 4;
+    %store/vec4 v0x147625e90_0, 0, 4;
+    %pushi/vec4 12, 0, 4;
+    %store/vec4 v0x147625f60_0, 0, 4;
+    %vpi_call 2 63 "$display", "Time\011d0\011d1\011d2\011d3\011s\011o" {0 0 0};
+    %vpi_call 2 64 "$monitor", "%0t\011%b\011%b\011%b\011%b\011%b\011%b", $time, v0x147625d30_0, v0x147625e00_0, v0x147625e90_0, v0x147625f60_0, v0x147626170_0, v0x1476260e0_0 {0 0 0};
+    %pushi/vec4 0, 0, 2;
+    %store/vec4 v0x147626170_0, 0, 2;
+    %pushi/vec4 1, 0, 32;
+    %store/vec4 v0x147626010_0, 0, 32;
+T_1.0 ;
+    %load/vec4 v0x147626010_0;
+    %cmpi/s 4, 0, 32;
+    %jmp/0xz T_1.1, 5;
+    %delay 10, 0;
+    %load/vec4 v0x147626010_0;
+    %pad/s 2;
+    %store/vec4 v0x147626170_0, 0, 2;
+    %load/vec4 v0x147626010_0;
+    %addi 1, 0, 32;
+    %store/vec4 v0x147626010_0, 0, 32;
+    %jmp T_1.0;
+T_1.1 ;
+    %end;
+    .thread T_1;
+# The file index is used to find the file name in the following table.
+:file_names 3;
+    "N/A";
+    "<interactive>";
+    "mux_2s.v";

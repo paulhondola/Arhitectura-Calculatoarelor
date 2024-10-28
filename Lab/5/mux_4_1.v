@@ -29,14 +29,14 @@ module mux_4_1_tb;
 	reg [3:0] d0, d1, d2, d3;
 	wire [3:0] o;
 
-	mux_4_1 #(
-	) cut(
+	mux_4_1 #(.width(4)
+    ) dut(
+        .sel(s),
 		.d0(d0),
 		.d1(d1),
 		.d2(d2),
 		.d3(d3),
-		.s(s),
-		.o(o)
+		.out(o)
 	);
 	
 	integer k;
@@ -46,8 +46,8 @@ module mux_4_1_tb;
 		d2 = 4'b0000;
 		d3 = 4'b1100;
 		
-		$display("Time\td0\td1\td2\td3\ts\to");
-		$monitor("%0t\t%b\t%b\t%b\t%b\t%b\t%b", $time, d0, d1, d2, d3, s, o);
+		$display("Time d0   d1   d2   d3   s   o");
+		$monitor("%0t\t%b %b %b %b %b\t%b", $time, d0, d1, d2, d3, s, o);
 		s = 2'b00;
 		for (k = 1; k < 4; k = k + 1)
 			#10 s = k;

@@ -34,7 +34,7 @@ module register_file(
 
 wire [3:0][7:0] data;
 wire [3:0] clear = 4'b0000;
-wire [3:0] load;
+wire [3:0] load = 4'b0000;
 
 decoder_2_4_enable dec(.enable(write_enable), .sel(write_address), .out(load));
 
@@ -82,7 +82,7 @@ register #(
     .data_out(data[3])
 );
 
-mux_4_1 #(
+mux_4_1 #(.width(8)
 ) mux(
     .sel(read_address),
     .data(data),
@@ -111,9 +111,11 @@ always @(*)
 
 endmodule
 
-module mux_4_1 (
+module mux_4_1 #(
+  parameter width = 8
+)(
     input wire [1:0] sel,
-    input wire [3:0][7:0] data,
+    input wire [3:0][width-1 :0] data,
     output wire [7:0] out
 );
 
@@ -144,7 +146,7 @@ module tb_register_file;
   );
 
   // Clock generation
-  always #5 clk = ~clk; // 100 MHz clock period (10 ns)
+  always #5 clk = ~clk;
 
   // Test sequence
   initial begin
@@ -153,7 +155,7 @@ module tb_register_file;
     $monitor("   %h  |    %h   |   %b  |   %h   |  %h", write_data, write_address, write_enable, read_data, read_address);
 
     clk = 0;
-    reset_b = 0; // Start with reset asserted
+    reset_b = 0; // Start with reset
     write_enable = 1;
     write_data = 8'hff;
     write_address = 2'b00;
@@ -173,6 +175,11 @@ module tb_register_file;
     #10 read_address = 2'b01;
 
     #10 read_address = 2'b10;
+
+    #10 write_address = 2'b11;
+    #10 write_data = 8'h55;
+    #10 read_address = 2'b10;
+    #10 read_address = 2'b11;
 
     // Finish simulation
     $finish;
