@@ -1,0 +1,94 @@
+#! /opt/homebrew/Cellar/icarus-verilog/12.0/bin/vvp
+:ivl_version "12.0 (stable)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision + 0;
+:vpi_module "/opt/homebrew/Cellar/icarus-verilog/12.0/lib/ivl/system.vpi";
+:vpi_module "/opt/homebrew/Cellar/icarus-verilog/12.0/lib/ivl/vhdl_sys.vpi";
+:vpi_module "/opt/homebrew/Cellar/icarus-verilog/12.0/lib/ivl/vhdl_textio.vpi";
+:vpi_module "/opt/homebrew/Cellar/icarus-verilog/12.0/lib/ivl/v2005_math.vpi";
+:vpi_module "/opt/homebrew/Cellar/icarus-verilog/12.0/lib/ivl/va_math.vpi";
+S_0x154610870 .scope module, "tb" "tb" 2 30;
+ .timescale 0 0;
+v0x154621fe0_0 .var "bcd", 15 0;
+v0x1546220a0_0 .net "e3", 15 0, L_0x154622a10;  1 drivers
+S_0x154609ce0 .scope module, "uut" "bcde3conv" 2 37, 2 1 0, S_0x154610870;
+ .timescale 0 0;
+    .port_info 0 /INPUT 16 "bcd";
+    .port_info 1 /OUTPUT 16 "e3";
+P_0x1546099f0 .param/l "width" 0 2 2, +C4<00000000000000000000000000000100>;
+v0x154621e60_0 .net "bcd", 15 0, v0x154621fe0_0;  1 drivers
+v0x154621f20_0 .net "e3", 15 0, L_0x154622a10;  alias, 1 drivers
+L_0x154622550 .part v0x154621fe0_0, 0, 4;
+L_0x154622630 .part v0x154621fe0_0, 4, 4;
+L_0x154622710 .part v0x154621fe0_0, 8, 4;
+L_0x154622870 .part v0x154621fe0_0, 12, 4;
+L_0x154622a10 .concat [ 4 4 4 4], L_0x154622150, L_0x1546222f0, L_0x1546223f0, L_0x154622490;
+S_0x154609e50 .scope module, "cnv[0]" "add4b" 2 10, 2 18 0, S_0x154609ce0;
+ .timescale 0 0;
+    .port_info 0 /INPUT 4 "a";
+    .port_info 1 /INPUT 4 "b";
+    .port_info 2 /OUTPUT 4 "sum";
+P_0x154607970 .param/l "width" 0 2 19, +C4<00000000000000000000000000000100>;
+v0x15460fbe0_0 .net "a", 3 0, L_0x154622550;  1 drivers
+L_0x158078010 .functor BUFT 1, C4<0011>, C4<0>, C4<0>, C4<0>;
+v0x154620d50_0 .net "b", 3 0, L_0x158078010;  1 drivers
+v0x154620df0_0 .net "sum", 3 0, L_0x154622150;  1 drivers
+L_0x154622150 .arith/sum 4, L_0x154622550, L_0x158078010;
+S_0x154620e90 .scope module, "cnv[1]" "add4b" 2 10, 2 18 0, S_0x154609ce0;
+ .timescale 0 0;
+    .port_info 0 /INPUT 4 "a";
+    .port_info 1 /INPUT 4 "b";
+    .port_info 2 /OUTPUT 4 "sum";
+P_0x154621070 .param/l "width" 0 2 19, +C4<00000000000000000000000000000100>;
+v0x1546211e0_0 .net "a", 3 0, L_0x154622630;  1 drivers
+v0x154621290_0 .net "b", 3 0, L_0x158078010;  alias, 1 drivers
+v0x154621330_0 .net "sum", 3 0, L_0x1546222f0;  1 drivers
+L_0x1546222f0 .arith/sum 4, L_0x154622630, L_0x158078010;
+S_0x1546213d0 .scope module, "cnv[2]" "add4b" 2 10, 2 18 0, S_0x154609ce0;
+ .timescale 0 0;
+    .port_info 0 /INPUT 4 "a";
+    .port_info 1 /INPUT 4 "b";
+    .port_info 2 /OUTPUT 4 "sum";
+P_0x1546215a0 .param/l "width" 0 2 19, +C4<00000000000000000000000000000100>;
+v0x154621730_0 .net "a", 3 0, L_0x154622710;  1 drivers
+v0x1546217e0_0 .net "b", 3 0, L_0x158078010;  alias, 1 drivers
+v0x154621880_0 .net "sum", 3 0, L_0x1546223f0;  1 drivers
+L_0x1546223f0 .arith/sum 4, L_0x154622710, L_0x158078010;
+S_0x154621930 .scope module, "cnv[3]" "add4b" 2 10, 2 18 0, S_0x154609ce0;
+ .timescale 0 0;
+    .port_info 0 /INPUT 4 "a";
+    .port_info 1 /INPUT 4 "b";
+    .port_info 2 /OUTPUT 4 "sum";
+P_0x154621b00 .param/l "width" 0 2 19, +C4<00000000000000000000000000000100>;
+v0x154621c70_0 .net "a", 3 0, L_0x154622870;  1 drivers
+v0x154621d30_0 .net "b", 3 0, L_0x158078010;  alias, 1 drivers
+v0x154621dd0_0 .net "sum", 3 0, L_0x154622490;  1 drivers
+L_0x154622490 .arith/sum 4, L_0x154622870, L_0x158078010;
+    .scope S_0x154610870;
+T_0 ;
+    %vpi_call 2 44 "$display", "bcd e3" {0 0 0};
+    %vpi_call 2 45 "$monitor", "%b\011%b", v0x154621fe0_0, v0x1546220a0_0 {0 0 0};
+    %pushi/vec4 0, 0, 16;
+    %store/vec4 v0x154621fe0_0, 0, 16;
+    %delay 10, 0;
+    %pushi/vec4 3, 0, 16;
+    %store/vec4 v0x154621fe0_0, 0, 16;
+    %delay 10, 0;
+    %pushi/vec4 51, 0, 16;
+    %store/vec4 v0x154621fe0_0, 0, 16;
+    %delay 10, 0;
+    %pushi/vec4 819, 0, 16;
+    %store/vec4 v0x154621fe0_0, 0, 16;
+    %delay 10, 0;
+    %pushi/vec4 13107, 0, 16;
+    %store/vec4 v0x154621fe0_0, 0, 16;
+    %delay 10, 0;
+    %pushi/vec4 13104, 0, 16;
+    %store/vec4 v0x154621fe0_0, 0, 16;
+    %end;
+    .thread T_0;
+# The file index is used to find the file name in the following table.
+:file_names 3;
+    "N/A";
+    "<interactive>";
+    "bcde3conv.v";

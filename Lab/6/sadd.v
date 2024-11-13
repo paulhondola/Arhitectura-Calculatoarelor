@@ -13,19 +13,12 @@ reg state, next_state;
 
 always @(*) begin
     case (state)
-        S0_ST: case ({x, y})
-            2'b00: next_state = S0_ST;
-            2'b01: next_state = S0_ST;
-            2'b10: next_state = S0_ST;
-            2'b11: next_state = S1_ST;
-        endcase 
-
-        S1_ST: case ({x, y})
-            2'b00: next_state = S0_ST;
-            2'b01: next_state = S1_ST;
-            2'b10: next_state = S1_ST;
-            2'b11: next_state = S1_ST;
-        endcase
+        S0_ST: 
+            if(x & y) next_state = S1_ST; 
+            else next_state = S0_ST;
+        S1_ST:
+            if(~x & ~y) next_state = S0_ST;
+            else next_state = S1_ST; 
     endcase
 end
 
@@ -34,19 +27,10 @@ end
 always @(*) begin
     out = 0;
     case (state)
-        S0_ST: case ({x, y})
-            2'b00: out = 1'b0;
-            2'b01: out = 1'b1;
-            2'b10: out = 1'b1;
-            2'b11: out = 1'b0;
-        endcase
-
-        S1_ST: case ({x, y})
-            2'b00: out = 1'b1;
-            2'b01: out = 1'b0;
-            2'b10: out = 1'b0;
-            2'b11: out = 1'b1;
-        endcase
+        S0_ST:
+            if(x ^ y) out = 1'b1;
+        S1_ST:
+            if(x ~^ y) out = 1'b1;
     endcase
 end
 

@@ -3,13 +3,12 @@ module patt(
     output reg out
 );
 
-parameter S0_ST = 3'd0;
-parameter S1_ST = 3'd1;
-parameter S2_ST = 3'd2;
-parameter S3_ST = 3'd3;
-parameter S4_ST = 3'd4;
+parameter S0_ST = 2'd0;
+parameter S1_ST = 2'd1;
+parameter S2_ST = 2'd2;
+parameter S3_ST = 2'd3;
 
-reg[2:0] state, next_state;
+reg[1:0] state, next_state; 
 
 // bloc 1 -> logica de stare
 
@@ -18,19 +17,14 @@ always @(*) begin
         S0_ST: next_state = in ? S1_ST : S0_ST;
         S1_ST: next_state = in ? S1_ST : S2_ST;
         S2_ST: next_state = in ? S3_ST : S0_ST;
-        S3_ST: next_state = in ? S4_ST : S0_ST;
-        S4_ST: next_state = in ? S1_ST : S0_ST;
+        S3_ST: next_state = in ? S1_ST : S2_ST;
     endcase
 end
 
 // bloc 2 -> logica de iesire
 
 always @(*) begin
-    out = 0;
-    case (state)
-        S3_ST: out = in;
-        default: out = 0; 
-    endcase
+    out = (S3_ST == state && in) ? 1 : 0;
 end
 
 
