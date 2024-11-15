@@ -7,84 +7,138 @@
 :vpi_module "/opt/homebrew/Cellar/icarus-verilog/12.0/lib/ivl/vhdl_textio.vpi";
 :vpi_module "/opt/homebrew/Cellar/icarus-verilog/12.0/lib/ivl/v2005_math.vpi";
 :vpi_module "/opt/homebrew/Cellar/icarus-verilog/12.0/lib/ivl/va_math.vpi";
-S_0x154610870 .scope module, "tb" "tb" 2 30;
+S_0x10de09170 .scope module, "tb" "tb" 2 30;
  .timescale 0 0;
-v0x154621fe0_0 .var "bcd", 15 0;
-v0x1546220a0_0 .net "e3", 15 0, L_0x154622a10;  1 drivers
-S_0x154609ce0 .scope module, "uut" "bcde3conv" 2 37, 2 1 0, S_0x154610870;
+v0x10de1cbb0_0 .var/i "a", 31 0;
+v0x10de1cc60_0 .var/i "b", 31 0;
+v0x10de1cd10_0 .var "bcd", 15 0;
+v0x10de1cde0_0 .var/i "c", 31 0;
+v0x10de1ce80_0 .var/i "d", 31 0;
+v0x10de1cf70_0 .net "e3", 15 0, L_0x10de1d8d0;  1 drivers
+S_0x10de0b8c0 .scope module, "uut" "bcde3conv" 2 37, 2 1 0, S_0x10de09170;
  .timescale 0 0;
     .port_info 0 /INPUT 16 "bcd";
     .port_info 1 /OUTPUT 16 "e3";
-P_0x1546099f0 .param/l "width" 0 2 2, +C4<00000000000000000000000000000100>;
-v0x154621e60_0 .net "bcd", 15 0, v0x154621fe0_0;  1 drivers
-v0x154621f20_0 .net "e3", 15 0, L_0x154622a10;  alias, 1 drivers
-L_0x154622550 .part v0x154621fe0_0, 0, 4;
-L_0x154622630 .part v0x154621fe0_0, 4, 4;
-L_0x154622710 .part v0x154621fe0_0, 8, 4;
-L_0x154622870 .part v0x154621fe0_0, 12, 4;
-L_0x154622a10 .concat [ 4 4 4 4], L_0x154622150, L_0x1546222f0, L_0x1546223f0, L_0x154622490;
-S_0x154609e50 .scope module, "cnv[0]" "add4b" 2 10, 2 18 0, S_0x154609ce0;
+P_0x10de0b880 .param/l "width" 0 2 2, +C4<00000000000000000000000000000100>;
+v0x10de1ca30_0 .net "bcd", 15 0, v0x10de1cd10_0;  1 drivers
+v0x10de1caf0_0 .net "e3", 15 0, L_0x10de1d8d0;  alias, 1 drivers
+L_0x10de1d410 .part v0x10de1cd10_0, 0, 4;
+L_0x10de1d4f0 .part v0x10de1cd10_0, 4, 4;
+L_0x10de1d5d0 .part v0x10de1cd10_0, 8, 4;
+L_0x10de1d730 .part v0x10de1cd10_0, 12, 4;
+L_0x10de1d8d0 .concat [ 4 4 4 4], L_0x10de1d010, L_0x10de1d1b0, L_0x10de1d2b0, L_0x10de1d350;
+S_0x10de0ba30 .scope module, "cnv[0]" "add4b" 2 10, 2 18 0, S_0x10de0b8c0;
  .timescale 0 0;
     .port_info 0 /INPUT 4 "a";
     .port_info 1 /INPUT 4 "b";
     .port_info 2 /OUTPUT 4 "sum";
-P_0x154607970 .param/l "width" 0 2 19, +C4<00000000000000000000000000000100>;
-v0x15460fbe0_0 .net "a", 3 0, L_0x154622550;  1 drivers
-L_0x158078010 .functor BUFT 1, C4<0011>, C4<0>, C4<0>, C4<0>;
-v0x154620d50_0 .net "b", 3 0, L_0x158078010;  1 drivers
-v0x154620df0_0 .net "sum", 3 0, L_0x154622150;  1 drivers
-L_0x154622150 .arith/sum 4, L_0x154622550, L_0x158078010;
-S_0x154620e90 .scope module, "cnv[1]" "add4b" 2 10, 2 18 0, S_0x154609ce0;
+P_0x10de08030 .param/l "width" 0 2 19, +C4<00000000000000000000000000000100>;
+v0x10de06690_0 .net "a", 3 0, L_0x10de1d410;  1 drivers
+L_0x128040010 .functor BUFT 1, C4<0011>, C4<0>, C4<0>, C4<0>;
+v0x10de1b920_0 .net "b", 3 0, L_0x128040010;  1 drivers
+v0x10de1b9c0_0 .net "sum", 3 0, L_0x10de1d010;  1 drivers
+L_0x10de1d010 .arith/sum 4, L_0x10de1d410, L_0x128040010;
+S_0x10de1ba60 .scope module, "cnv[1]" "add4b" 2 10, 2 18 0, S_0x10de0b8c0;
  .timescale 0 0;
     .port_info 0 /INPUT 4 "a";
     .port_info 1 /INPUT 4 "b";
     .port_info 2 /OUTPUT 4 "sum";
-P_0x154621070 .param/l "width" 0 2 19, +C4<00000000000000000000000000000100>;
-v0x1546211e0_0 .net "a", 3 0, L_0x154622630;  1 drivers
-v0x154621290_0 .net "b", 3 0, L_0x158078010;  alias, 1 drivers
-v0x154621330_0 .net "sum", 3 0, L_0x1546222f0;  1 drivers
-L_0x1546222f0 .arith/sum 4, L_0x154622630, L_0x158078010;
-S_0x1546213d0 .scope module, "cnv[2]" "add4b" 2 10, 2 18 0, S_0x154609ce0;
+P_0x10de1bc40 .param/l "width" 0 2 19, +C4<00000000000000000000000000000100>;
+v0x10de1bdb0_0 .net "a", 3 0, L_0x10de1d4f0;  1 drivers
+v0x10de1be60_0 .net "b", 3 0, L_0x128040010;  alias, 1 drivers
+v0x10de1bf00_0 .net "sum", 3 0, L_0x10de1d1b0;  1 drivers
+L_0x10de1d1b0 .arith/sum 4, L_0x10de1d4f0, L_0x128040010;
+S_0x10de1bfa0 .scope module, "cnv[2]" "add4b" 2 10, 2 18 0, S_0x10de0b8c0;
  .timescale 0 0;
     .port_info 0 /INPUT 4 "a";
     .port_info 1 /INPUT 4 "b";
     .port_info 2 /OUTPUT 4 "sum";
-P_0x1546215a0 .param/l "width" 0 2 19, +C4<00000000000000000000000000000100>;
-v0x154621730_0 .net "a", 3 0, L_0x154622710;  1 drivers
-v0x1546217e0_0 .net "b", 3 0, L_0x158078010;  alias, 1 drivers
-v0x154621880_0 .net "sum", 3 0, L_0x1546223f0;  1 drivers
-L_0x1546223f0 .arith/sum 4, L_0x154622710, L_0x158078010;
-S_0x154621930 .scope module, "cnv[3]" "add4b" 2 10, 2 18 0, S_0x154609ce0;
+P_0x10de1c170 .param/l "width" 0 2 19, +C4<00000000000000000000000000000100>;
+v0x10de1c300_0 .net "a", 3 0, L_0x10de1d5d0;  1 drivers
+v0x10de1c3b0_0 .net "b", 3 0, L_0x128040010;  alias, 1 drivers
+v0x10de1c450_0 .net "sum", 3 0, L_0x10de1d2b0;  1 drivers
+L_0x10de1d2b0 .arith/sum 4, L_0x10de1d5d0, L_0x128040010;
+S_0x10de1c500 .scope module, "cnv[3]" "add4b" 2 10, 2 18 0, S_0x10de0b8c0;
  .timescale 0 0;
     .port_info 0 /INPUT 4 "a";
     .port_info 1 /INPUT 4 "b";
     .port_info 2 /OUTPUT 4 "sum";
-P_0x154621b00 .param/l "width" 0 2 19, +C4<00000000000000000000000000000100>;
-v0x154621c70_0 .net "a", 3 0, L_0x154622870;  1 drivers
-v0x154621d30_0 .net "b", 3 0, L_0x158078010;  alias, 1 drivers
-v0x154621dd0_0 .net "sum", 3 0, L_0x154622490;  1 drivers
-L_0x154622490 .arith/sum 4, L_0x154622870, L_0x158078010;
-    .scope S_0x154610870;
+P_0x10de1c6d0 .param/l "width" 0 2 19, +C4<00000000000000000000000000000100>;
+v0x10de1c840_0 .net "a", 3 0, L_0x10de1d730;  1 drivers
+v0x10de1c900_0 .net "b", 3 0, L_0x128040010;  alias, 1 drivers
+v0x10de1c9a0_0 .net "sum", 3 0, L_0x10de1d350;  1 drivers
+L_0x10de1d350 .arith/sum 4, L_0x10de1d730, L_0x128040010;
+    .scope S_0x10de09170;
 T_0 ;
-    %vpi_call 2 44 "$display", "bcd e3" {0 0 0};
-    %vpi_call 2 45 "$monitor", "%b\011%b", v0x154621fe0_0, v0x1546220a0_0 {0 0 0};
+    %vpi_call 2 46 "$display", "bcd e3" {0 0 0};
+    %vpi_call 2 47 "$monitor", "%b\011%b", v0x10de1cd10_0, v0x10de1cf70_0 {0 0 0};
     %pushi/vec4 0, 0, 16;
-    %store/vec4 v0x154621fe0_0, 0, 16;
+    %store/vec4 v0x10de1cd10_0, 0, 16;
+    %pushi/vec4 0, 0, 32;
+    %store/vec4 v0x10de1cbb0_0, 0, 32;
+T_0.0 ;
+    %load/vec4 v0x10de1cbb0_0;
+    %cmpi/s 10, 0, 32;
+    %jmp/0xz T_0.1, 5;
+    %pushi/vec4 0, 0, 32;
+    %store/vec4 v0x10de1cc60_0, 0, 32;
+T_0.2 ;
+    %load/vec4 v0x10de1cc60_0;
+    %cmpi/s 10, 0, 32;
+    %jmp/0xz T_0.3, 5;
+    %pushi/vec4 0, 0, 32;
+    %store/vec4 v0x10de1cde0_0, 0, 32;
+T_0.4 ;
+    %load/vec4 v0x10de1cde0_0;
+    %cmpi/s 10, 0, 32;
+    %jmp/0xz T_0.5, 5;
+    %pushi/vec4 0, 0, 32;
+    %store/vec4 v0x10de1ce80_0, 0, 32;
+T_0.6 ;
+    %load/vec4 v0x10de1ce80_0;
+    %cmpi/s 10, 0, 32;
+    %jmp/0xz T_0.7, 5;
+    %load/vec4 v0x10de1cbb0_0;
+    %pad/s 4;
+    %ix/load 4, 12, 0;
+    %flag_set/imm 4, 0;
+    %store/vec4 v0x10de1cd10_0, 4, 4;
+    %load/vec4 v0x10de1cc60_0;
+    %pad/s 4;
+    %ix/load 4, 8, 0;
+    %flag_set/imm 4, 0;
+    %store/vec4 v0x10de1cd10_0, 4, 4;
+    %load/vec4 v0x10de1cde0_0;
+    %pad/s 4;
+    %ix/load 4, 4, 0;
+    %flag_set/imm 4, 0;
+    %store/vec4 v0x10de1cd10_0, 4, 4;
+    %load/vec4 v0x10de1ce80_0;
+    %pad/s 4;
+    %ix/load 4, 0, 0;
+    %flag_set/imm 4, 0;
+    %store/vec4 v0x10de1cd10_0, 4, 4;
     %delay 10, 0;
-    %pushi/vec4 3, 0, 16;
-    %store/vec4 v0x154621fe0_0, 0, 16;
-    %delay 10, 0;
-    %pushi/vec4 51, 0, 16;
-    %store/vec4 v0x154621fe0_0, 0, 16;
-    %delay 10, 0;
-    %pushi/vec4 819, 0, 16;
-    %store/vec4 v0x154621fe0_0, 0, 16;
-    %delay 10, 0;
-    %pushi/vec4 13107, 0, 16;
-    %store/vec4 v0x154621fe0_0, 0, 16;
-    %delay 10, 0;
-    %pushi/vec4 13104, 0, 16;
-    %store/vec4 v0x154621fe0_0, 0, 16;
+    %load/vec4 v0x10de1ce80_0;
+    %addi 1, 0, 32;
+    %store/vec4 v0x10de1ce80_0, 0, 32;
+    %jmp T_0.6;
+T_0.7 ;
+    %load/vec4 v0x10de1cde0_0;
+    %addi 1, 0, 32;
+    %store/vec4 v0x10de1cde0_0, 0, 32;
+    %jmp T_0.4;
+T_0.5 ;
+    %load/vec4 v0x10de1cc60_0;
+    %addi 1, 0, 32;
+    %store/vec4 v0x10de1cc60_0, 0, 32;
+    %jmp T_0.2;
+T_0.3 ;
+    %load/vec4 v0x10de1cbb0_0;
+    %addi 1, 0, 32;
+    %store/vec4 v0x10de1cbb0_0, 0, 32;
+    %jmp T_0.0;
+T_0.1 ;
     %end;
     .thread T_0;
 # The file index is used to find the file name in the following table.

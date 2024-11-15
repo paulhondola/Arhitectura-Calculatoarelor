@@ -39,17 +39,28 @@ bcde3conv #(
     .e3(e3)
 );
 
+integer a,b,c,d;
+
 initial begin
   
   $display("bcd e3");
   $monitor("%b\t%b", bcd, e3);
 
-    bcd = 16'b0000_0000_0000_0000;
-    #10 bcd = 16'b0000_0000_0000_0011;
-    #10 bcd = 16'b0000_0000_0011_0011;
-    #10 bcd = 16'b0000_0011_0011_0011;
-    #10 bcd = 16'b0011_0011_0011_0011;
-    #10 bcd = 16'b0011_0011_0011_0000;
+    // 0 -> 9 / 0000 -> 1001
+    bcd = 16'd0;
+    
+    for(a = 0; a < 10; a=a+1)
+    for(b = 0; b < 10; b=b+1)
+    for(c = 0; c < 10; c=c+1)
+    for(d = 0; d < 10; d=d+1)
+    begin
+        bcd[15:12] = a;
+        bcd[11:8] = b;
+        bcd[7:4] = c;
+        bcd[3:0] = d;
+        #10;
+    end
+
 end
 
 endmodule
