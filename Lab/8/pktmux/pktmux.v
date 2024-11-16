@@ -68,64 +68,46 @@ initial begin
     pad_pkt = 0;
     zero_pkt = 0;
     mgln_pkt = 0;
-    urand64(pkt);
-    urand64(msg_len);
 
     #CLK_PULSE 
     pad_pkt = 1;
     zero_pkt = 0;
     mgln_pkt = 0;
-    urand64(pkt);
-    urand64(msg_len);
 
     #CLK_PULSE 
     pad_pkt = 0;
     zero_pkt = 1;
     mgln_pkt = 0;
-    urand64(pkt);
-    urand64(msg_len);
 
     #CLK_PULSE 
     pad_pkt = 0;
     zero_pkt = 0;
     mgln_pkt = 1;
-    urand64(pkt);
-    urand64(msg_len);
 
     #CLK_PULSE 
     pad_pkt = 0;
     zero_pkt = 0;
     mgln_pkt = 0;
-    urand64(pkt);
-    urand64(msg_len);
 
     #CLK_PULSE 
     pad_pkt = 1;
     zero_pkt = 0;
     mgln_pkt = 0;
-    urand64(pkt);
-    urand64(msg_len);
 
     #CLK_PULSE 
     pad_pkt = 0;
     zero_pkt = 1;
     mgln_pkt = 0;
-    urand64(pkt);
-    urand64(msg_len);
 
     #CLK_PULSE 
     pad_pkt = 0;
     zero_pkt = 0;
     mgln_pkt = 1;
-    urand64(pkt);
-    urand64(msg_len);
 
     #CLK_PULSE
     pad_pkt = 0;
     zero_pkt = 0;
     mgln_pkt = 0;
-    urand64(pkt);
-    urand64(msg_len);
 
     #1
 

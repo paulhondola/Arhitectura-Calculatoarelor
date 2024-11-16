@@ -1,69 +1,64 @@
+module dec #(parameter w=2)(
+	input [w-1:0] s,
+	input e,
+	output reg [2**w-1:0] o
+);
+	always @ (*) begin
+		o = 0;
+		if (e)
+  		  o[s] = 1;
+	end
+endmodule
+
+module rgst #(
+    parameter w=8
+)(
+    input clk, rst_b, ld, clr, input [w-1:0] d, output reg [w-1:0] q
+);
+    always @ (posedge clk, negedge rst_b)
+        if (!rst_b)                 q <= 0;
+        else if (clr)               q <= 0;
+        else if (ld)                q <= d;
+endmodule
+
 module regfl(
-    input wire clk,
-    input wire rst_b,
-    input wire write_enable,
-    input wire [2:0] index,
-    input wire [63:0] data_in,
-    output wire [511:0] blk_out
+	input clk,
+	input rst_b,
+	input we,
+	input [2:0] s,
+	input [63:0] d,
+	output [511:0] q
 );
 
-wire [63:0] data [0:7];
-wire [7:0] load_index;
+wire [7:0] o;
+wire [63:0] data [7:0];
 
-// Decode the index from the index input
-dec3to8 dec_inst(
-    .in(index[2:0]),
-    .enable(write_enable),
-    .out(load_index)
+dec #(
+	.w(3)
+) dec0 (
+	.s(s),
+	.e(we),
+	.o(o)
 );
 
-// Instantiate the 8 registers
 generate
 genvar i;
 
 for (i = 0; i < 8; i = i + 1) begin: reg_inst
-    rgst reg_inst(
-        .clk(clk),
-        .clear(~rst_b),
-        .load(load_index[i]),
-        .data_in(data_in),
-        .data_out(data[i])
-    );
+	rgst #(.w(64)) reg_inst(
+		.clk(clk),
+		.clr(1'b0),
+		.rst_b(rst_b),
+		.ld(o[3'd7 - i]),
+		.d(d),
+		.q(data[i])
+	);
 end
 
 endgenerate
 
+assign q = {data[7], data[6], data[5], data[4], data[3], data[2], data[1], data[0]};
 
-endmodule
-
-module dec3to8(
-    input wire [2:0] in,
-    input wire enable,
-    output reg [7:0] out
-);
-
-always @(*) begin
-    out = 0;
-    if (enable)
-        out[in] = 1;
-end
-
-endmodule
-
-module rgst(
-    input wire clk,
-    input wire clear,
-    input wire load,
-    input wire [63:0] data_in,
-    output reg [63:0] data_out
-);
-
-always @(posedge clk) begin
-    if (clear)
-        data_out <= 64'b0;
-    else if (load)
-        data_out <= data_in;
-end
 endmodule
 
 module regfl_tb;
