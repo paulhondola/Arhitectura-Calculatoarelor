@@ -49,7 +49,7 @@ for (i = 0; i < 8; i = i + 1) begin: reg_inst
 		.clk(clk),
 		.clr(1'b0),
 		.rst_b(rst_b),
-		.ld(o[3'd7 - i]),
+		.ld(o[i]),
 		.d(d),
 		.q(data[i])
 	);
@@ -57,7 +57,7 @@ end
 
 endgenerate
 
-assign q = {data[7], data[6], data[5], data[4], data[3], data[2], data[1], data[0]};
+assign q = {data[0], data[1], data[2], data[3], data[4], data[5], data[6], data[7]};
 
 endmodule
 
@@ -73,10 +73,10 @@ wire [511:0] blk_out;
 regfl regfl_tb(
     .clk(clk),
     .rst_b(rst_b),
-    .write_enable(write_enable),
-    .index(index),
-    .data_in(data_in),
-    .blk_out(blk_out)
+    .we(write_enable),
+    .s(index),
+    .d(data_in),
+    .q(blk_out)
 );
 
 // Testbench parameters
@@ -116,9 +116,6 @@ initial begin
     #(CLK_PERIOD * 6) write_enable = 0;
     #CLK_PERIOD write_enable = 1;
 
-    #1
-
-    $finish;
 
 end
 

@@ -7,7 +7,7 @@ module pktmux #(
 );
 
 reg [w-1:0] zero = 0;
-reg [w-1:0] pad = ~0 << (w-1);
+reg [w-1:0] pad = 1 << (w-1);
 
 always @(*) begin
     if (pad_pkt) o = pad;
@@ -109,9 +109,25 @@ initial begin
     zero_pkt = 0;
     mgln_pkt = 0;
 
-    #1
+    #CLK_PULSE 
+    pad_pkt = 1;
+    zero_pkt = 0;
+    mgln_pkt = 0;
 
-    $finish;
+    #CLK_PULSE 
+    pad_pkt = 0;
+    zero_pkt = 1;
+    mgln_pkt = 0;
+
+    #CLK_PULSE 
+    pad_pkt = 0;
+    zero_pkt = 0;
+    mgln_pkt = 1;
+
+    #CLK_PULSE
+    pad_pkt = 0;
+    zero_pkt = 0;
+    mgln_pkt = 0;
 
 end
 

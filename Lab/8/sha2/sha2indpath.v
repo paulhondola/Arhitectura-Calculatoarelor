@@ -61,7 +61,7 @@ end
 
 endgenerate
 
-assign q = {data[7] , data[6] , data[5] , data[4] , data[3] , data[2] , data[1] , data[0]};
+assign q = {data[0] , data[1] , data[2] , data[3] , data[4] , data[5] , data[6] , data[7]};
 
 endmodule
 
