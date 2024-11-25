@@ -1,0 +1,42 @@
+#! /opt/homebrew/Cellar/icarus-verilog/12.0/bin/vvp
+:ivl_version "12.0 (stable)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision + 0;
+:vpi_module "/opt/homebrew/Cellar/icarus-verilog/12.0/lib/ivl/system.vpi";
+:vpi_module "/opt/homebrew/Cellar/icarus-verilog/12.0/lib/ivl/vhdl_sys.vpi";
+:vpi_module "/opt/homebrew/Cellar/icarus-verilog/12.0/lib/ivl/vhdl_textio.vpi";
+:vpi_module "/opt/homebrew/Cellar/icarus-verilog/12.0/lib/ivl/v2005_math.vpi";
+:vpi_module "/opt/homebrew/Cellar/icarus-verilog/12.0/lib/ivl/va_math.vpi";
+S_0x131706c70 .scope module, "check" "check" 2 1;
+ .timescale 0 0;
+    .port_info 0 /INPUT 5 "i";
+    .port_info 1 /OUTPUT 1 "o";
+L_0x131717d50 .functor AND 1, L_0x1317178d0, L_0x131717c10, C4<1>, C4<1>;
+v0x131706de0_0 .net *"_ivl_1", 0 0, L_0x131717680;  1 drivers
+v0x131716e60_0 .net *"_ivl_11", 0 0, L_0x1317179f0;  1 drivers
+v0x131716f00_0 .net *"_ivl_12", 31 0, L_0x131717ad0;  1 drivers
+L_0x1280400a0 .functor BUFT 1, C4<0000000000000000000000000000000>, C4<0>, C4<0>, C4<0>;
+v0x131716fb0_0 .net *"_ivl_15", 30 0, L_0x1280400a0;  1 drivers
+L_0x1280400e8 .functor BUFT 1, C4<00000000000000000000000000000001>, C4<0>, C4<0>, C4<0>;
+v0x131717060_0 .net/2u *"_ivl_16", 31 0, L_0x1280400e8;  1 drivers
+v0x131717150_0 .net *"_ivl_18", 0 0, L_0x131717c10;  1 drivers
+v0x1317171f0_0 .net *"_ivl_2", 31 0, L_0x131717720;  1 drivers
+L_0x128040010 .functor BUFT 1, C4<0000000000000000000000000000000>, C4<0>, C4<0>, C4<0>;
+v0x1317172a0_0 .net *"_ivl_5", 30 0, L_0x128040010;  1 drivers
+L_0x128040058 .functor BUFT 1, C4<00000000000000000000000000000000>, C4<0>, C4<0>, C4<0>;
+v0x131717350_0 .net/2u *"_ivl_6", 31 0, L_0x128040058;  1 drivers
+v0x131717460_0 .net *"_ivl_8", 0 0, L_0x1317178d0;  1 drivers
+o0x1280081f0 .functor BUFZ 5, C4<zzzzz>; HiZ drive
+v0x131717500_0 .net "i", 4 0, o0x1280081f0;  0 drivers
+v0x1317175b0_0 .net "o", 0 0, L_0x131717d50;  1 drivers
+L_0x131717680 .part o0x1280081f0, 1, 1;
+L_0x131717720 .concat [ 1 31 0 0], L_0x131717680, L_0x128040010;
+L_0x1317178d0 .cmp/eq 32, L_0x131717720, L_0x128040058;
+L_0x1317179f0 .part o0x1280081f0, 0, 1;
+L_0x131717ad0 .concat [ 1 31 0 0], L_0x1317179f0, L_0x1280400a0;
+L_0x131717c10 .cmp/eq 32, L_0x131717ad0, L_0x1280400e8;
+# The file index is used to find the file name in the following table.
+:file_names 3;
+    "N/A";
+    "<interactive>";
+    "check.v";
