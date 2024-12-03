@@ -1,0 +1,97 @@
+#! /opt/homebrew/Cellar/icarus-verilog/12.0/bin/vvp
+:ivl_version "12.0 (stable)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision + 0;
+:vpi_module "/opt/homebrew/Cellar/icarus-verilog/12.0/lib/ivl/system.vpi";
+:vpi_module "/opt/homebrew/Cellar/icarus-verilog/12.0/lib/ivl/vhdl_sys.vpi";
+:vpi_module "/opt/homebrew/Cellar/icarus-verilog/12.0/lib/ivl/vhdl_textio.vpi";
+:vpi_module "/opt/homebrew/Cellar/icarus-verilog/12.0/lib/ivl/v2005_math.vpi";
+:vpi_module "/opt/homebrew/Cellar/icarus-verilog/12.0/lib/ivl/va_math.vpi";
+S_0x12e604a60 .scope module, "ex2_tb" "ex2_tb" 2 12;
+ .timescale 0 0;
+v0x600001af95f0_0 .var "a", 3 0;
+v0x600001af9680_0 .var "b", 3 0;
+v0x600001af9710_0 .net "cif_u", 3 0, L_0x6000019f8280;  1 drivers
+v0x600001af97a0_0 .net "cif_z", 3 0, L_0x6000019f85a0;  1 drivers
+S_0x12e604bd0 .scope begin, "$ivl_for_loop0" "$ivl_for_loop0" 2 25, 2 25 0, S_0x12e604a60;
+ .timescale 0 0;
+v0x600001af8b40_0 .var/i "i", 31 0;
+S_0x12e604d40 .scope module, "uut" "ex2" 2 17, 2 1 0, S_0x12e604a60;
+ .timescale 0 0;
+    .port_info 0 /INPUT 4 "a";
+    .port_info 1 /INPUT 4 "b";
+    .port_info 2 /OUTPUT 4 "cif_z";
+    .port_info 3 /OUTPUT 4 "cif_u";
+v0x600001af8bd0_0 .net *"_ivl_0", 31 0, L_0x6000019f8000;  1 drivers
+L_0x1300780a0 .functor BUFT 1, C4<00000000000000000000000000001010>, C4<0>, C4<0>, C4<0>;
+v0x600001af8c60_0 .net/2u *"_ivl_10", 31 0, L_0x1300780a0;  1 drivers
+v0x600001af8cf0_0 .net *"_ivl_12", 31 0, L_0x6000019f81e0;  1 drivers
+v0x600001af8d80_0 .net *"_ivl_16", 31 0, L_0x6000019f8320;  1 drivers
+L_0x1300780e8 .functor BUFT 1, C4<0000000000000000000000000000>, C4<0>, C4<0>, C4<0>;
+v0x600001af8e10_0 .net *"_ivl_19", 27 0, L_0x1300780e8;  1 drivers
+v0x600001af8ea0_0 .net *"_ivl_20", 31 0, L_0x6000019f83c0;  1 drivers
+L_0x130078130 .functor BUFT 1, C4<0000000000000000000000000000>, C4<0>, C4<0>, C4<0>;
+v0x600001af8f30_0 .net *"_ivl_23", 27 0, L_0x130078130;  1 drivers
+v0x600001af8fc0_0 .net *"_ivl_24", 31 0, L_0x6000019f8460;  1 drivers
+L_0x130078178 .functor BUFT 1, C4<00000000000000000000000000001010>, C4<0>, C4<0>, C4<0>;
+v0x600001af9050_0 .net/2u *"_ivl_26", 31 0, L_0x130078178;  1 drivers
+v0x600001af90e0_0 .net *"_ivl_28", 31 0, L_0x6000019f8500;  1 drivers
+L_0x130078010 .functor BUFT 1, C4<0000000000000000000000000000>, C4<0>, C4<0>, C4<0>;
+v0x600001af9170_0 .net *"_ivl_3", 27 0, L_0x130078010;  1 drivers
+v0x600001af9200_0 .net *"_ivl_4", 31 0, L_0x6000019f80a0;  1 drivers
+L_0x130078058 .functor BUFT 1, C4<0000000000000000000000000000>, C4<0>, C4<0>, C4<0>;
+v0x600001af9290_0 .net *"_ivl_7", 27 0, L_0x130078058;  1 drivers
+v0x600001af9320_0 .net *"_ivl_8", 31 0, L_0x6000019f8140;  1 drivers
+v0x600001af93b0_0 .net "a", 3 0, v0x600001af95f0_0;  1 drivers
+v0x600001af9440_0 .net "b", 3 0, v0x600001af9680_0;  1 drivers
+v0x600001af94d0_0 .net "cif_u", 3 0, L_0x6000019f8280;  alias, 1 drivers
+v0x600001af9560_0 .net "cif_z", 3 0, L_0x6000019f85a0;  alias, 1 drivers
+L_0x6000019f8000 .concat [ 4 28 0 0], v0x600001af95f0_0, L_0x130078010;
+L_0x6000019f80a0 .concat [ 4 28 0 0], v0x600001af9680_0, L_0x130078058;
+L_0x6000019f8140 .arith/sum 32, L_0x6000019f8000, L_0x6000019f80a0;
+L_0x6000019f81e0 .arith/mod 32, L_0x6000019f8140, L_0x1300780a0;
+L_0x6000019f8280 .part L_0x6000019f81e0, 0, 4;
+L_0x6000019f8320 .concat [ 4 28 0 0], v0x600001af95f0_0, L_0x1300780e8;
+L_0x6000019f83c0 .concat [ 4 28 0 0], v0x600001af9680_0, L_0x130078130;
+L_0x6000019f8460 .arith/sum 32, L_0x6000019f8320, L_0x6000019f83c0;
+L_0x6000019f8500 .arith/div 32, L_0x6000019f8460, L_0x130078178;
+L_0x6000019f85a0 .part L_0x6000019f8500, 0, 4;
+    .scope S_0x12e604a60;
+T_0 ;
+    %fork t_1, S_0x12e604bd0;
+    %jmp t_0;
+    .scope S_0x12e604bd0;
+t_1 ;
+    %pushi/vec4 0, 0, 32;
+    %store/vec4 v0x600001af8b40_0, 0, 32;
+T_0.0 ;
+    %load/vec4 v0x600001af8b40_0;
+    %cmpi/s 16, 0, 32;
+    %jmp/0xz T_0.1, 5;
+    %vpi_func 2 26 "$urandom" 32 {0 0 0};
+    %pushi/vec4 16, 0, 32;
+    %mod;
+    %pad/u 4;
+    %store/vec4 v0x600001af95f0_0, 0, 4;
+    %vpi_func 2 27 "$urandom" 32 {0 0 0};
+    %pushi/vec4 16, 0, 32;
+    %mod;
+    %pad/u 4;
+    %store/vec4 v0x600001af9680_0, 0, 4;
+    %delay 10, 0;
+    %vpi_call 2 29 "$display", "a = %d | b = %d | cif_z = %d | cif_u = %d", v0x600001af95f0_0, v0x600001af9680_0, v0x600001af97a0_0, v0x600001af9710_0 {0 0 0};
+    %load/vec4 v0x600001af8b40_0;
+    %addi 1, 0, 32;
+    %store/vec4 v0x600001af8b40_0, 0, 32;
+    %jmp T_0.0;
+T_0.1 ;
+    %end;
+    .scope S_0x12e604a60;
+t_0 %join;
+    %end;
+    .thread T_0;
+# The file index is used to find the file name in the following table.
+:file_names 3;
+    "N/A";
+    "<interactive>";
+    "ex2.v";

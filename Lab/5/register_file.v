@@ -181,8 +181,6 @@ module tb_register_file;
     #10 read_address = 2'b10;
     #10 read_address = 2'b11;
 
-    // Finish simulation
-    $finish;
   end
 
 endmodule

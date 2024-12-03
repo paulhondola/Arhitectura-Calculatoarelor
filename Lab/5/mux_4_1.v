@@ -16,11 +16,10 @@ module mux_4_1 #(
     );
 
     // Tri-state drivers: only one data line drives the output at a time
-    assign out = enable[0] ? d0 : 
-                 enable[1] ? d1 : 
-                 enable[2] ? d2 : 
-                 enable[3] ? d3 : 
-                 {width{1'bz}};  // High-impedance if no valid selection
+    assign out = enable[0] ? d0 : {width{1'bz}};
+    assign out = enable[1] ? d1 : {width{1'bz}};
+    assign out = enable[2] ? d2 : {width{1'bz}};
+    assign out = enable[3] ? d3 : {width{1'bz}};
 
 endmodule
 
@@ -41,16 +40,13 @@ module mux_4_1_tb;
 	
 	integer k;
 	initial begin
-		d0 = 4'b0101;
-		d1 = 4'b1111;
-		d2 = 4'b0000;
-		d3 = 4'b1100;
-		
-		$display("Time d0   d1   d2   d3   s   o");
-		$monitor("%0t\t%b %b %b %b %b\t%b", $time, d0, d1, d2, d3, s, o);
-		s = 2'b00;
-		for (k = 1; k < 4; k = k + 1)
-			#10 s = k;
+		$display("Time d3   d2   d1   d0   s   o");
+		$monitor("%0t\t%b %b %b %b %b\t%b", $time, d3, d2, d1, d0, s, o);
+		for (k = 0; k < 4; k = k + 1) begin
+            s = k;
+            {d3, d2, d1, d0} = $urandom;
+            #10;
+        end
 	end
 endmodule
 

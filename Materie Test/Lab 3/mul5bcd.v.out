@@ -1,0 +1,71 @@
+#! /opt/homebrew/Cellar/icarus-verilog/12.0/bin/vvp
+:ivl_version "12.0 (stable)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision + 0;
+:vpi_module "/opt/homebrew/Cellar/icarus-verilog/12.0/lib/ivl/system.vpi";
+:vpi_module "/opt/homebrew/Cellar/icarus-verilog/12.0/lib/ivl/vhdl_sys.vpi";
+:vpi_module "/opt/homebrew/Cellar/icarus-verilog/12.0/lib/ivl/vhdl_textio.vpi";
+:vpi_module "/opt/homebrew/Cellar/icarus-verilog/12.0/lib/ivl/v2005_math.vpi";
+:vpi_module "/opt/homebrew/Cellar/icarus-verilog/12.0/lib/ivl/va_math.vpi";
+S_0x12bf059a0 .scope module, "mul5bcd_tb" "mul5bcd_tb" 2 26;
+ .timescale 0 0;
+v0x6000004ec1b0_0 .net "d", 3 0, v0x6000004ec000_0;  1 drivers
+v0x6000004ec240_0 .var "i", 3 0;
+v0x6000004ec2d0_0 .var/i "k", 31 0;
+v0x6000004ec360_0 .net "u", 3 0, v0x6000004ec120_0;  1 drivers
+S_0x12bf048d0 .scope module, "mul5bcd_i" "mul5bcd" 2 30, 2 1 0, S_0x12bf059a0;
+ .timescale 0 0;
+    .port_info 0 /INPUT 4 "i";
+    .port_info 1 /OUTPUT 4 "d";
+    .port_info 2 /OUTPUT 4 "u";
+v0x6000004ec000_0 .var "d", 3 0;
+v0x6000004ec090_0 .net "i", 3 0, v0x6000004ec240_0;  1 drivers
+v0x6000004ec120_0 .var "u", 3 0;
+E_0x6000023e9680 .event anyedge, v0x6000004ec090_0;
+    .scope S_0x12bf048d0;
+T_0 ;
+    %wait E_0x6000023e9680;
+    %pushi/vec4 0, 0, 1;
+    %load/vec4 v0x6000004ec090_0;
+    %parti/s 1, 0, 2;
+    %concat/vec4; draw_concat_vec4
+    %concati/vec4 0, 0, 1;
+    %load/vec4 v0x6000004ec090_0;
+    %parti/s 1, 0, 2;
+    %concat/vec4; draw_concat_vec4
+    %store/vec4 v0x6000004ec120_0, 0, 4;
+    %pushi/vec4 0, 0, 1;
+    %load/vec4 v0x6000004ec090_0;
+    %parti/s 3, 1, 2;
+    %concat/vec4; draw_concat_vec4
+    %store/vec4 v0x6000004ec000_0, 0, 4;
+    %jmp T_0;
+    .thread T_0, $push;
+    .scope S_0x12bf059a0;
+T_1 ;
+    %vpi_call 2 34 "$display", "Time\011i\011\011d\011\011u" {0 0 0};
+    %vpi_call 2 35 "$monitor", "%0t\011%b(%4d)\011%b(%4d)\011%b(%4d)", $time, v0x6000004ec240_0, v0x6000004ec240_0, v0x6000004ec1b0_0, v0x6000004ec1b0_0, v0x6000004ec360_0, v0x6000004ec360_0 {0 0 0};
+    %pushi/vec4 0, 0, 4;
+    %store/vec4 v0x6000004ec240_0, 0, 4;
+    %pushi/vec4 1, 0, 32;
+    %store/vec4 v0x6000004ec2d0_0, 0, 32;
+T_1.0 ;
+    %load/vec4 v0x6000004ec2d0_0;
+    %cmpi/s 10, 0, 32;
+    %jmp/0xz T_1.1, 5;
+    %delay 10, 0;
+    %load/vec4 v0x6000004ec2d0_0;
+    %pad/s 4;
+    %store/vec4 v0x6000004ec240_0, 0, 4;
+    %load/vec4 v0x6000004ec2d0_0;
+    %addi 1, 0, 32;
+    %store/vec4 v0x6000004ec2d0_0, 0, 32;
+    %jmp T_1.0;
+T_1.1 ;
+    %end;
+    .thread T_1;
+# The file index is used to find the file name in the following table.
+:file_names 3;
+    "N/A";
+    "<interactive>";
+    "mul5bcd.v";

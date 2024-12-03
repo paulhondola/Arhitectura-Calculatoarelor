@@ -1,0 +1,125 @@
+#! /opt/homebrew/Cellar/icarus-verilog/12.0/bin/vvp
+:ivl_version "12.0 (stable)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision + 0;
+:vpi_module "/opt/homebrew/Cellar/icarus-verilog/12.0/lib/ivl/system.vpi";
+:vpi_module "/opt/homebrew/Cellar/icarus-verilog/12.0/lib/ivl/vhdl_sys.vpi";
+:vpi_module "/opt/homebrew/Cellar/icarus-verilog/12.0/lib/ivl/vhdl_textio.vpi";
+:vpi_module "/opt/homebrew/Cellar/icarus-verilog/12.0/lib/ivl/v2005_math.vpi";
+:vpi_module "/opt/homebrew/Cellar/icarus-verilog/12.0/lib/ivl/va_math.vpi";
+S_0x130608120 .scope module, "add2b_tb" "add2b_tb" 2 19;
+ .timescale 0 0;
+v0x60000036e2e0_0 .var "ci", 0 0;
+v0x60000036e370_0 .net "co", 0 0, L_0x60000006c5a0;  1 drivers
+v0x60000036e400_0 .var/i "k", 31 0;
+v0x60000036e490_0 .var "x", 1 0;
+v0x60000036e520_0 .var "y", 1 0;
+v0x60000036e5b0_0 .net "z", 1 0, L_0x60000006cb40;  1 drivers
+S_0x130608290 .scope module, "cut" "add2b" 2 25, 2 1 0, S_0x130608120;
+ .timescale 0 0;
+    .port_info 0 /INPUT 2 "x";
+    .port_info 1 /INPUT 2 "y";
+    .port_info 2 /INPUT 1 "ci";
+    .port_info 3 /OUTPUT 2 "z";
+    .port_info 4 /OUTPUT 1 "co";
+v0x60000036df80_0 .net "c1", 0 0, L_0x60000006c000;  1 drivers
+v0x60000036e010_0 .net "ci", 0 0, v0x60000036e2e0_0;  1 drivers
+v0x60000036e0a0_0 .net "co", 0 0, L_0x60000006c5a0;  alias, 1 drivers
+v0x60000036e130_0 .net "x", 1 0, v0x60000036e490_0;  1 drivers
+v0x60000036e1c0_0 .net "y", 1 0, v0x60000036e520_0;  1 drivers
+v0x60000036e250_0 .net "z", 1 0, L_0x60000006cb40;  alias, 1 drivers
+L_0x60000006c460 .part v0x60000036e490_0, 0, 1;
+L_0x60000006c500 .part v0x60000036e520_0, 0, 1;
+L_0x60000006ca00 .part v0x60000036e490_0, 1, 1;
+L_0x60000006caa0 .part v0x60000036e520_0, 1, 1;
+L_0x60000006cb40 .concat8 [ 1 1 0 0], L_0x60000006c0a0, L_0x60000006c640;
+S_0x130609370 .scope module, "inst1" "fac" 2 8, 2 12 0, S_0x130608290;
+ .timescale 0 0;
+    .port_info 0 /INPUT 1 "x";
+    .port_info 1 /INPUT 1 "y";
+    .port_info 2 /INPUT 1 "ci";
+    .port_info 3 /OUTPUT 1 "co";
+    .port_info 4 /OUTPUT 1 "z";
+L_0x138078058 .functor BUFT 1, C4<0>, C4<0>, C4<0>, C4<0>;
+v0x60000036d0e0_0 .net *"_ivl_10", 0 0, L_0x138078058;  1 drivers
+v0x60000036c870_0 .net *"_ivl_11", 1 0, L_0x60000006c280;  1 drivers
+v0x60000036d200_0 .net *"_ivl_13", 1 0, L_0x60000006c320;  1 drivers
+L_0x1380780a0 .functor BUFT 1, C4<0>, C4<0>, C4<0>, C4<0>;
+v0x60000036d290_0 .net *"_ivl_16", 0 0, L_0x1380780a0;  1 drivers
+v0x60000036d320_0 .net *"_ivl_17", 1 0, L_0x60000006c3c0;  1 drivers
+v0x60000036d3b0_0 .net *"_ivl_3", 1 0, L_0x60000006c140;  1 drivers
+L_0x138078010 .functor BUFT 1, C4<0>, C4<0>, C4<0>, C4<0>;
+v0x60000036d440_0 .net *"_ivl_6", 0 0, L_0x138078010;  1 drivers
+v0x60000036d4d0_0 .net *"_ivl_7", 1 0, L_0x60000006c1e0;  1 drivers
+v0x60000036d560_0 .net "ci", 0 0, v0x60000036e2e0_0;  alias, 1 drivers
+v0x60000036d5f0_0 .net "co", 0 0, L_0x60000006c000;  alias, 1 drivers
+v0x60000036d680_0 .net "x", 0 0, L_0x60000006c460;  1 drivers
+v0x60000036d710_0 .net "y", 0 0, L_0x60000006c500;  1 drivers
+v0x60000036d7a0_0 .net "z", 0 0, L_0x60000006c0a0;  1 drivers
+L_0x60000006c000 .part L_0x60000006c3c0, 1, 1;
+L_0x60000006c0a0 .part L_0x60000006c3c0, 0, 1;
+L_0x60000006c140 .concat [ 1 1 0 0], L_0x60000006c460, L_0x138078010;
+L_0x60000006c1e0 .concat [ 1 1 0 0], L_0x60000006c500, L_0x138078058;
+L_0x60000006c280 .arith/sum 2, L_0x60000006c140, L_0x60000006c1e0;
+L_0x60000006c320 .concat [ 1 1 0 0], v0x60000036e2e0_0, L_0x1380780a0;
+L_0x60000006c3c0 .arith/sum 2, L_0x60000006c280, L_0x60000006c320;
+S_0x1306094e0 .scope module, "inst2" "fac" 2 9, 2 12 0, S_0x130608290;
+ .timescale 0 0;
+    .port_info 0 /INPUT 1 "x";
+    .port_info 1 /INPUT 1 "y";
+    .port_info 2 /INPUT 1 "ci";
+    .port_info 3 /OUTPUT 1 "co";
+    .port_info 4 /OUTPUT 1 "z";
+L_0x138078130 .functor BUFT 1, C4<0>, C4<0>, C4<0>, C4<0>;
+v0x60000036d830_0 .net *"_ivl_10", 0 0, L_0x138078130;  1 drivers
+v0x60000036d8c0_0 .net *"_ivl_11", 1 0, L_0x60000006c820;  1 drivers
+v0x60000036d950_0 .net *"_ivl_13", 1 0, L_0x60000006c8c0;  1 drivers
+L_0x138078178 .functor BUFT 1, C4<0>, C4<0>, C4<0>, C4<0>;
+v0x60000036d9e0_0 .net *"_ivl_16", 0 0, L_0x138078178;  1 drivers
+v0x60000036da70_0 .net *"_ivl_17", 1 0, L_0x60000006c960;  1 drivers
+v0x60000036db00_0 .net *"_ivl_3", 1 0, L_0x60000006c6e0;  1 drivers
+L_0x1380780e8 .functor BUFT 1, C4<0>, C4<0>, C4<0>, C4<0>;
+v0x60000036db90_0 .net *"_ivl_6", 0 0, L_0x1380780e8;  1 drivers
+v0x60000036dc20_0 .net *"_ivl_7", 1 0, L_0x60000006c780;  1 drivers
+v0x60000036dcb0_0 .net "ci", 0 0, L_0x60000006c000;  alias, 1 drivers
+v0x60000036dd40_0 .net "co", 0 0, L_0x60000006c5a0;  alias, 1 drivers
+v0x60000036ddd0_0 .net "x", 0 0, L_0x60000006ca00;  1 drivers
+v0x60000036de60_0 .net "y", 0 0, L_0x60000006caa0;  1 drivers
+v0x60000036def0_0 .net "z", 0 0, L_0x60000006c640;  1 drivers
+L_0x60000006c5a0 .part L_0x60000006c960, 1, 1;
+L_0x60000006c640 .part L_0x60000006c960, 0, 1;
+L_0x60000006c6e0 .concat [ 1 1 0 0], L_0x60000006ca00, L_0x1380780e8;
+L_0x60000006c780 .concat [ 1 1 0 0], L_0x60000006caa0, L_0x138078130;
+L_0x60000006c820 .arith/sum 2, L_0x60000006c6e0, L_0x60000006c780;
+L_0x60000006c8c0 .concat [ 1 1 0 0], L_0x60000006c000, L_0x138078178;
+L_0x60000006c960 .arith/sum 2, L_0x60000006c820, L_0x60000006c8c0;
+    .scope S_0x130608120;
+T_0 ;
+    %vpi_call 2 29 "$display", "Time\011x\011\011y\011ci\011\011co\011z" {0 0 0};
+    %vpi_call 2 32 "$monitor", "%0t\011%b(%d)\011%b(%d)\011%b\011\011%b\011%b", $time, v0x60000036e490_0, v0x60000036e490_0, v0x60000036e520_0, v0x60000036e520_0, v0x60000036e2e0_0, v0x60000036e370_0, v0x60000036e5b0_0 {0 0 0};
+    %pushi/vec4 0, 0, 32;
+    %store/vec4 v0x60000036e400_0, 0, 32;
+T_0.0 ;
+    %load/vec4 v0x60000036e400_0;
+    %cmpi/s 32, 0, 32;
+    %jmp/0xz T_0.1, 5;
+    %load/vec4 v0x60000036e400_0;
+    %pad/s 5;
+    %split/vec4 1;
+    %store/vec4 v0x60000036e2e0_0, 0, 1;
+    %split/vec4 2;
+    %store/vec4 v0x60000036e520_0, 0, 2;
+    %store/vec4 v0x60000036e490_0, 0, 2;
+    %delay 10, 0;
+    %load/vec4 v0x60000036e400_0;
+    %addi 1, 0, 32;
+    %store/vec4 v0x60000036e400_0, 0, 32;
+    %jmp T_0.0;
+T_0.1 ;
+    %end;
+    .thread T_0;
+# The file index is used to find the file name in the following table.
+:file_names 3;
+    "N/A";
+    "<interactive>";
+    "add2b.v";
