@@ -20,7 +20,7 @@ endmodule
 
 module ex4_tb;
 
-localparam CLK_PERIOD = 10, CLK_CYCLES = 20;
+localparam CLK_PERIOD = 10, CLK_CYCLES = 100;
 
 reg clk;
 reg [7:0] val;
@@ -39,12 +39,12 @@ initial begin
 end
 
 initial begin
-    repeat (CLK_CYCLES) #(CLK_PERIOD/4) val = $urandom;
+    repeat (CLK_CYCLES) #(CLK_PERIOD / 8) val = $urandom;
 end
 
 initial begin
     $display("val | out");
-    $monitor("%b | %d", val, out);
+    $monitor("%3d | %2d", val, out);
 end
 
 endmodule

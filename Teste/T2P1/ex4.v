@@ -98,9 +98,9 @@ initial begin
     $display("X | Y | P");
     $monitor("%d | %d | %d", X, Y, P);
 
-    repeat(10) begin
-        X = $random;
-        Y = $random;
+    repeat(20) begin
+        X = $urandom;
+        Y = $urandom;
         #10;
     end
 end

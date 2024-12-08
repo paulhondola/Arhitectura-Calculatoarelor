@@ -3,8 +3,13 @@ module ex4(
     output reg [7:0] byte
 );
 
-reg [7:0] rgst = 0;
-reg [3:0] counter = 0;
+reg [7:0] rgst;
+reg [3:0] counter;
+initial begin
+    rgst = 8'b0;
+    counter = 4'b0;
+    byte = 8'b0;
+end
 
 always @(posedge clk) begin
     if (flush) begin
@@ -29,56 +34,66 @@ endmodule
 
 module ex4_tb;
 
-    // Declarații semnale
-    reg clk, bit, flush;
-    wire [7:0] byte;
+reg clk;
+reg flush;
+reg bit;
+wire [7:0] byte;
 
-    // Instanțierea modulului
-    ex4 uut (
-        .clk(clk),
-        .bit(bit),
-        .flush(flush),
-        .byte(byte)
-    );
+// Instanțierea modulului ex4
+ex4 uut (
+    .clk(clk),
+    .flush(flush),
+    .bit(bit),
+    .byte(byte)
+);
 
-integer i = 0;
+// Generarea semnalului de ceas
+localparam CLK_PERIOD = 10;
+localparam CLK_CYCLES = 30;
+initial begin
+    clk = 0;
+    repeat (2 * CLK_CYCLES) # (CLK_PERIOD / 2) clk = ~clk;
+end
 
-    // Clock generator
-    initial begin
-        clk = 0;
-        repeat(100) begin 
-        #5 clk = ~clk; // Perioadă 10ns
-        end
-    end
+initial begin
+    bit = 0;
+    #(CLK_PERIOD) bit = 1;
+    #(CLK_PERIOD) bit = 0;
+    #(2 * CLK_PERIOD) bit = 1;
+    #(CLK_PERIOD) bit = 0;
+    #(CLK_PERIOD) bit = 1;
+    #(CLK_PERIOD) bit = 0;
+    #(CLK_PERIOD) bit = 1;
+    #(CLK_PERIOD) bit = 0;  
+    #(CLK_PERIOD) bit = 1;
+    #(CLK_PERIOD) bit = 0;
+    #(2 * CLK_PERIOD) bit = 1;
+    #(CLK_PERIOD) bit = 0;
+    #(CLK_PERIOD) bit = 1;
+    #(CLK_PERIOD) bit = 0;
+    #(CLK_PERIOD) bit = 1;
+    #(CLK_PERIOD) bit = 0;
+    #(2 * CLK_PERIOD) bit = 1;
+    #(CLK_PERIOD) bit = 0;
+    #(2 * CLK_PERIOD) bit = 1;
+    #(CLK_PERIOD) bit = 0;
+    #(CLK_PERIOD) bit = 1;
+    #(2 * CLK_PERIOD) bit = 0;
+    #(2 * CLK_PERIOD) bit = 1;
+end
 
-    initial begin
-        i = 0;
-        repeat(50) #10 i = i + 1;
-    end
+initial begin
+    flush = 0;
+    #(13 * CLK_PERIOD) flush = 1;
+    #(8 * CLK_PERIOD) flush = 0;
+end
 
-    // Test sequence
-    initial begin
-        // Inițializări
-        flush = 0;
-        bit = 0;
+initial begin
+    $display("Time| flush | bit_in | byte");
+    $display("------------------------------------------------");
+    $monitor("%3d | %b | %b | %b", $time, flush, bit, byte);
+end
 
-        $display("\tcounter\t| byte | bit | flush");
-        $monitor("%d %b %b %b", i, byte, bit, flush);
 
-        // Test resetare prin flush
-        #10 flush = 1; // Activăm flush
-        #10 flush = 0; // Dezactivăm flush
-
-        // Test citire normală de biți
-        #10 bit = 1; // Primul bit
-        #10 bit = 0;
-        #10 bit = 1;
-        #10 bit = 0;
-        #10 bit = 1;
-        #10 bit = 0;
-        #10 bit = 1;
-        #10 bit = 0; // Al 8-lea bit
-
-    end
 
 endmodule
