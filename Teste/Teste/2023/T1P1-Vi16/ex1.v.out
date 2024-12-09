@@ -1,0 +1,134 @@
+#! /opt/homebrew/Cellar/icarus-verilog/12.0/bin/vvp
+:ivl_version "12.0 (stable)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision + 0;
+:vpi_module "/opt/homebrew/Cellar/icarus-verilog/12.0/lib/ivl/system.vpi";
+:vpi_module "/opt/homebrew/Cellar/icarus-verilog/12.0/lib/ivl/vhdl_sys.vpi";
+:vpi_module "/opt/homebrew/Cellar/icarus-verilog/12.0/lib/ivl/vhdl_textio.vpi";
+:vpi_module "/opt/homebrew/Cellar/icarus-verilog/12.0/lib/ivl/v2005_math.vpi";
+:vpi_module "/opt/homebrew/Cellar/icarus-verilog/12.0/lib/ivl/va_math.vpi";
+S_0x13fe08fc0 .scope module, "e3_mult_tb" "e3_mult_tb" 2 16;
+ .timescale 0 0;
+v0x600000dfe2e0_0 .net "act_out", 7 0, L_0x600000efc820;  1 drivers
+v0x600000dfe370_0 .var/i "data_file", 31 0;
+v0x600000dfe400_0 .var "exp_out", 7 0;
+v0x600000dfe490_0 .var "in_0", 3 0;
+v0x600000dfe520_0 .var "in_1", 3 0;
+v0x600000dfe5b0_0 .var/i "nota", 31 0;
+v0x600000dfe640_0 .var/i "random_int", 31 0;
+v0x600000dfe6d0_0 .var/i "tests_passed", 31 0;
+v0x600000dfe760_0 .var/i "tests_total", 31 0;
+v0x600000dfe7f0_0 .net "verdict", 0 0, L_0x600000efc8c0;  1 drivers
+L_0x600000efc8c0 .cmp/eeq 8, v0x600000dfe400_0, L_0x600000efc820;
+S_0x13fe09130 .scope module, "uut" "e3_mult" 2 22, 2 2 0, S_0x13fe08fc0;
+ .timescale 0 0;
+    .port_info 0 /INPUT 4 "in_0";
+    .port_info 1 /INPUT 4 "in_1";
+    .port_info 2 /OUTPUT 8 "out";
+L_0x130078010 .functor BUFT 1, C4<0011>, C4<0>, C4<0>, C4<0>;
+v0x600000dfd440_0 .net/2u *"_ivl_0", 3 0, L_0x130078010;  1 drivers
+L_0x1300780a0 .functor BUFT 1, C4<0000>, C4<0>, C4<0>, C4<0>;
+v0x600000dfd4d0_0 .net *"_ivl_11", 3 0, L_0x1300780a0;  1 drivers
+v0x600000dfd560_0 .net *"_ivl_12", 7 0, L_0x600000efc1e0;  1 drivers
+L_0x1300780e8 .functor BUFT 1, C4<0000>, C4<0>, C4<0>, C4<0>;
+v0x600000dfd5f0_0 .net *"_ivl_15", 3 0, L_0x1300780e8;  1 drivers
+v0x600000dfd680_0 .net *"_ivl_18", 31 0, L_0x600000efc320;  1 drivers
+L_0x130078130 .functor BUFT 1, C4<000000000000000000000000>, C4<0>, C4<0>, C4<0>;
+v0x600000dfd710_0 .net *"_ivl_21", 23 0, L_0x130078130;  1 drivers
+L_0x130078178 .functor BUFT 1, C4<00000000000000000000000000001010>, C4<0>, C4<0>, C4<0>;
+v0x600000dfd7a0_0 .net/2u *"_ivl_22", 31 0, L_0x130078178;  1 drivers
+v0x600000dfd830_0 .net *"_ivl_24", 31 0, L_0x600000efc3c0;  1 drivers
+L_0x1300781c0 .functor BUFT 1, C4<00000000000000000000000000000011>, C4<0>, C4<0>, C4<0>;
+v0x600000dfd8c0_0 .net/2u *"_ivl_26", 31 0, L_0x1300781c0;  1 drivers
+v0x600000dfd950_0 .net *"_ivl_28", 31 0, L_0x600000efc460;  1 drivers
+v0x600000dfd9e0_0 .net *"_ivl_32", 31 0, L_0x600000efc5a0;  1 drivers
+L_0x130078208 .functor BUFT 1, C4<000000000000000000000000>, C4<0>, C4<0>, C4<0>;
+v0x600000dfda70_0 .net *"_ivl_35", 23 0, L_0x130078208;  1 drivers
+L_0x130078250 .functor BUFT 1, C4<00000000000000000000000000001010>, C4<0>, C4<0>, C4<0>;
+v0x600000dfdb00_0 .net/2u *"_ivl_36", 31 0, L_0x130078250;  1 drivers
+v0x600000dfdb90_0 .net *"_ivl_38", 31 0, L_0x600000efc640;  1 drivers
+L_0x130078058 .functor BUFT 1, C4<0011>, C4<0>, C4<0>, C4<0>;
+v0x600000dfdc20_0 .net/2u *"_ivl_4", 3 0, L_0x130078058;  1 drivers
+L_0x130078298 .functor BUFT 1, C4<00000000000000000000000000000011>, C4<0>, C4<0>, C4<0>;
+v0x600000dfdcb0_0 .net/2u *"_ivl_40", 31 0, L_0x130078298;  1 drivers
+v0x600000dfdd40_0 .net *"_ivl_42", 31 0, L_0x600000efc6e0;  1 drivers
+v0x600000dfddd0_0 .net *"_ivl_8", 7 0, L_0x600000efc140;  1 drivers
+v0x600000dfde60_0 .net "dec", 3 0, L_0x600000efc500;  1 drivers
+v0x600000dfdef0_0 .net "in_0", 3 0, v0x600000dfe490_0;  1 drivers
+v0x600000dfdf80_0 .net "in_1", 3 0, v0x600000dfe520_0;  1 drivers
+v0x600000dfe010_0 .net "nr_0", 3 0, L_0x600000efc000;  1 drivers
+v0x600000dfe0a0_0 .net "nr_1", 3 0, L_0x600000efc0a0;  1 drivers
+v0x600000dfe130_0 .net "out", 7 0, L_0x600000efc820;  alias, 1 drivers
+v0x600000dfe1c0_0 .net "produs", 7 0, L_0x600000efc280;  1 drivers
+v0x600000dfe250_0 .net "unit", 3 0, L_0x600000efc780;  1 drivers
+L_0x600000efc000 .arith/sub 4, v0x600000dfe490_0, L_0x130078010;
+L_0x600000efc0a0 .arith/sub 4, v0x600000dfe520_0, L_0x130078058;
+L_0x600000efc140 .concat [ 4 4 0 0], L_0x600000efc000, L_0x1300780a0;
+L_0x600000efc1e0 .concat [ 4 4 0 0], L_0x600000efc0a0, L_0x1300780e8;
+L_0x600000efc280 .arith/mult 8, L_0x600000efc140, L_0x600000efc1e0;
+L_0x600000efc320 .concat [ 8 24 0 0], L_0x600000efc280, L_0x130078130;
+L_0x600000efc3c0 .arith/div 32, L_0x600000efc320, L_0x130078178;
+L_0x600000efc460 .arith/sum 32, L_0x600000efc3c0, L_0x1300781c0;
+L_0x600000efc500 .part L_0x600000efc460, 0, 4;
+L_0x600000efc5a0 .concat [ 8 24 0 0], L_0x600000efc280, L_0x130078208;
+L_0x600000efc640 .arith/mod 32, L_0x600000efc5a0, L_0x130078250;
+L_0x600000efc6e0 .arith/sum 32, L_0x600000efc640, L_0x130078298;
+L_0x600000efc780 .part L_0x600000efc6e0, 0, 4;
+L_0x600000efc820 .concat [ 4 4 0 0], L_0x600000efc780, L_0x600000efc500;
+    .scope S_0x13fe08fc0;
+T_0 ;
+    %vpi_call 2 29 "$display", "in_0\011in_1\011\011expected_out\011actual_out\011Passed(1)/Failed(0)" {0 0 0};
+    %vpi_call 2 30 "$monitor", "%4b\011%4b\011\011%12b\011%10b\011%18d", v0x600000dfe490_0, v0x600000dfe520_0, v0x600000dfe400_0, v0x600000dfe2e0_0, v0x600000dfe7f0_0 {0 0 0};
+    %pushi/vec4 0, 0, 32;
+    %store/vec4 v0x600000dfe760_0, 0, 32;
+    %pushi/vec4 0, 0, 32;
+    %store/vec4 v0x600000dfe6d0_0, 0, 32;
+    %pushi/vec4 0, 0, 32;
+    %store/vec4 v0x600000dfe370_0, 0, 32;
+    %vpi_func 2 35 "$fopen" 32, "ex1_tests.dat", "r" {0 0 0};
+    %store/vec4 v0x600000dfe370_0, 0, 32;
+    %load/vec4 v0x600000dfe370_0;
+    %cmpi/e 0, 0, 32;
+    %jmp/0xz  T_0.0, 4;
+    %vpi_call 2 37 "$display", "Adauga fisierul ex1_tests.dat in acelasi folder" {0 0 0};
+    %vpi_call 2 38 "$finish" {0 0 0};
+T_0.0 ;
+T_0.2 ;
+    %vpi_func 2 40 "$feof" 32, v0x600000dfe370_0 {0 0 0};
+    %nor/r;
+    %flag_set/vec4 8;
+    %jmp/0xz T_0.3, 8;
+    %vpi_func 2 41 "$fscanf" 32, v0x600000dfe370_0, "%b %b %b\012", v0x600000dfe490_0, v0x600000dfe520_0, v0x600000dfe400_0 {0 0 0};
+    %store/vec4 v0x600000dfe640_0, 0, 32;
+    %load/vec4 v0x600000dfe760_0;
+    %addi 1, 0, 32;
+    %store/vec4 v0x600000dfe760_0, 0, 32;
+    %delay 1, 0;
+    %load/vec4 v0x600000dfe6d0_0;
+    %load/vec4 v0x600000dfe7f0_0;
+    %pad/u 32;
+    %add;
+    %store/vec4 v0x600000dfe6d0_0, 0, 32;
+    %jmp T_0.2;
+T_0.3 ;
+    %vpi_call 2 47 "$display", "Passed / Total: %2d / %2d", v0x600000dfe6d0_0, v0x600000dfe760_0 {0 0 0};
+    %load/vec4 v0x600000dfe6d0_0;
+    %muli 1000, 0, 32;
+    %load/vec4 v0x600000dfe760_0;
+    %div/s;
+    %muli 2, 0, 32;
+    %store/vec4 v0x600000dfe5b0_0, 0, 32;
+    %load/vec4 v0x600000dfe5b0_0;
+    %pushi/vec4 1000, 0, 32;
+    %div/s;
+    %load/vec4 v0x600000dfe5b0_0;
+    %pushi/vec4 1000, 0, 32;
+    %mod/s;
+    %vpi_call 2 49 "$display", "Nota: %1d.%03d", S<1,vec4,s32>, S<0,vec4,s32> {2 0 0};
+    %end;
+    .thread T_0;
+# The file index is used to find the file name in the following table.
+:file_names 3;
+    "N/A";
+    "<interactive>";
+    "ex1.v";
