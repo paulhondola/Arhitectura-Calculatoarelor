@@ -13,32 +13,20 @@ module mult_last2 #(
     input rst_b,
     output reg [2*w-1:0] out
 );
+    reg [w-1:0] last = 0;
+    integer ignore = ign;
+    initial out = 0;
 
-    reg [w-1:0] last[1:0];  // 0 -> last_in, 1 -> last_last_in
-
-    // Reset complet
-    always @(negedge rst_b) begin
-        last[0] <= ign;
-        last[1] <= ign;
-        out <= 0;
-    end
-
-    // Logic sincron
-    always @(posedge clk) begin
-        if (ld) begin
-            // Actualizare valoare ignorată
-            if (in != ign) begin
-                last[0] <= in;
-                last[1] <= last[0];
-                out <= last[0] * in;  // Înmulțire între ultima valoare și valoarea curentă
-            end
-        end else begin
-            // Logică normală sincronizată la clock
-            if (in != ign) begin
-                last[1] <= last[0];
-                last[0] <= in;
-                out <= last[0] * last[1];  // Actualizare produs
-            end
+    always @(posedge clk, negedge rst_b, posedge ld) begin
+        if(~rst_b) begin
+            out <= 0;
+            last <= 0;
+            ignore <= ign;
+        end
+        else if(ld) ignore <= in;
+        else if (in != ignore) begin
+            out <= in * last;
+            last <= in;
         end
     end
 endmodule

@@ -1,6 +1,7 @@
 module counter #(
-    parameter width = 8,
-    parameter init_value = 8'hff
+    parameter width = 4,
+    parameter init_value = 4'hF,
+    parameter count_max = 4'hA
 )(
     input wire clk,
     input wire rst_b,
@@ -10,12 +11,13 @@ module counter #(
 );
 
 always @(posedge clk, negedge rst_b) begin
-    if(!rst_b)
-        q <= init_value;
-    else if (clear)
+    if(~rst_b || clear)
         q <= init_value;
     else if (c_up)
-        q <= q + 1;
+        if(q == count_max - 1)
+            q <= 0;
+        else
+            q <= q + 1;
 end
 
 endmodule
@@ -23,8 +25,9 @@ endmodule
 module tb_counter;
 
   // Parameters
-  parameter width = 8;
-  parameter init_value = 8'hff;
+  parameter width = 4;
+  parameter init_value = 8'h0;
+  parameter count_max = 4'h5;
 
   // Testbench signals
   reg clk;
@@ -36,7 +39,8 @@ module tb_counter;
   // Instantiate the counter
   counter #(
     .width(width),
-    .init_value(init_value)
+    .init_value(init_value),
+    .count_max(count_max)
   ) cut (
     .clk(clk),
     .rst_b(rst_b),
@@ -50,8 +54,8 @@ module tb_counter;
 
   // Test sequence
   initial begin
-    $display("clk rst c_up clr");
-    $monitor("%b   %b    %b    %b | %h", clk, rst_b, c_up, clear, q);
+    $display("c_up clr | q");
+    $monitor("%b    %b | %h", c_up, clear, q);
     // Initialize signals
     clk = 0;
     rst_b = 1;
@@ -67,8 +71,12 @@ module tb_counter;
     #50 c_up = 0; // Stop counting
 
     // Apply clear signal
-    #10 clear = 1; 
+    #100 clear = 1; 
     #10 clear = 0;
+
+    #10 c_up = 1;
+
+    #1000 clear = 1;
 
     // Finish simulation
     #10 $finish;

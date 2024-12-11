@@ -2,25 +2,53 @@
 Modulul va insuma ultimele 4 valori ale lui in, receptionate pe frontul crescator al semnalului de clk,
 considerand la inceput ultimele 3 valori primite ca fiind 0.
 Pe nivelul ridicat a semnalului de reset, modulul va reseta suma, inclusiv ultimele valori primite pe 0.*/
-module sum_last4(input[7:0] in, 
-                input reset,
-                input clk,
-                output reg[/* fill */] out);
+module sum_last4 (
+    input [7:0] in,
+    input reset,
+    input clk,
+    output reg [9:0] out
+);
 
-    /* Write Verilog code here */
+    reg [7:0] mem[2:0];
+
+    initial begin
+        out = 0;
+        mem[0] = 0;
+        mem[1] = 0;
+        mem[2] = 0;
+    end
+
+    always @(posedge clk, posedge reset) begin
+        if (reset) begin
+            out <= 0;
+            mem[0] <= 0;
+            mem[1] <= 0;
+            mem[2] <= 0;
+        end else begin
+            mem[0] <= in;
+            mem[1] <= mem[0];
+            mem[2] <= mem[1];
+            out <= in + mem[0] + mem[1] + mem[2];
+        end
+    end
 
 endmodule
 
 module sum_last4_tb;
 
-    reg[7:0] in;
+    reg [7:0] in;
     reg reset, clk;
-    
-    wire[/* fill */] act_out;
-    reg[/* fill */] exp_out;
+
+    wire [9:0] act_out;
+    reg [9:0] exp_out;
 
     wire verdict;
-    sum_last4 uut(.in(in), .reset(reset), .clk(clk), .out(act_out));
+    sum_last4 uut (
+        .in(in),
+        .reset(reset),
+        .clk(clk),
+        .out(act_out)
+    );
 
     integer tests_total, tests_passed, nota;
 
@@ -28,29 +56,29 @@ module sum_last4_tb;
 
     initial begin
         clk = 1;
-        repeat(66) #1 clk = ~clk;
+        repeat (66) #1 clk = ~clk;
     end
 
     initial begin
         $display("in\treset\t\texpected_out\tactual_out\tPassed(1)/Failed(0)");
         $monitor("%3d\t%5b\t\t%d\t\t%d\t%18b", in, reset, exp_out, act_out, verdict);
-        
+
         tests_total = 0;
         tests_passed = 0;
-    
+
         in = 8'd0;
         reset = 0;
         exp_out = 0;
         tests_total = tests_total + 1;
         #2;
         tests_passed = tests_passed + verdict;
-        
+
         in = 8'd100;
         exp_out = 100;
         tests_total = tests_total + 1;
         #2;
         tests_passed = tests_passed + verdict;
-    
+
         in = 8'd100;
         exp_out = 200;
         tests_total = tests_total + 1;
@@ -238,7 +266,7 @@ module sum_last4_tb;
         tests_total = tests_total + 1;
         #2;
         tests_passed = tests_passed + verdict;
-    
+
         in = 8'd100;
         exp_out = 200;
         tests_total = tests_total + 1;

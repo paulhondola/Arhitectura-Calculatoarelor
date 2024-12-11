@@ -22,9 +22,9 @@ module sum_ignore #(
         end else begin
             if (d != ign) begin
                 q <= d + d_prev;
-            end
-            if(d != ign)
                 d_prev <= d;
+            end
+                
         end
     end
 
